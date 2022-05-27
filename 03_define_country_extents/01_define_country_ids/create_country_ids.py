@@ -1,10 +1,15 @@
+import rsgislib.vectorutils
 import rsgislib.vectorattrs
 import rsgislib.tools.utils
 import numpy
 import osgeo.ogr as ogr
+import os
 
 out_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_UnqID.gpkg"
 out_vec_lyr="National"
+
+if os.path.exists(out_vec_file):
+    rsgislib.vectorutils.delete_vector_file(out_vec_file)
 
 rsgislib.vectorattrs.add_unq_numeric_col(
     vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC.gpkg",
@@ -54,7 +59,7 @@ for i, cntry_id in enumerate(ref_vals):
         if country_name in agb_allom_lut:
             agb_allom = agb_allom_lut[country_name]
             agb_allom_rgns[i] = agb_allom
-            agb_allom_rgns_idx[i] = agb_allom_id_lut["allom"][country_name]
+            agb_allom_rgns_idx[i] = agb_allom_id_lut["allom"][agb_allom]
 
 
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "country_names", ogr.OFTString, cntry_names.tolist())
