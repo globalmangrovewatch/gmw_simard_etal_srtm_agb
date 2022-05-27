@@ -66,5 +66,5 @@ rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "country_names"
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", ogr.OFTString, agb_allom_rgns.tolist())
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", ogr.OFTInteger, agb_allom_rgns_idx.tolist())
 
-rsgislib.tools.utils.write_dict_to_json("allom_id_lut.json", agb_allom_id_lut)
+rsgislib.tools.utils.write_dict_to_json(agb_allom_id_lut, "allom_id_lut.json")
 
