@@ -26,7 +26,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
 
     def run_gen_commands(self):
 
-        self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/hgt/*/*.kea',
+        self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/hgt/*/*/*.hgt',
                               out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/kea')
 
         self.pop_params_db()
