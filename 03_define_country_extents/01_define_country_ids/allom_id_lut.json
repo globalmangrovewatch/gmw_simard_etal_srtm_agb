@@ -1,0 +1,16 @@
+{
+    "allom": {
+        "Americas generic power": 3,
+        "East Africa generic power": 5,
+        "Global generic power": 2,
+        "Middle East Asia generic power": 4,
+        "South East Asia generic power": 1
+    },
+    "id": {
+        "1": "South East Asia generic power",
+        "2": "Global generic power",
+        "3": "Americas generic power",
+        "4": "Middle East Asia generic power",
+        "5": "East Africa generic power"
+    }
+}
