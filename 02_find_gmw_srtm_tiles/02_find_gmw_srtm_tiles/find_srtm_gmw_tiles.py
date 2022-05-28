@@ -15,5 +15,8 @@ cp_cmds = rsgislib.imageutils.imagelut.query_file_lut(
     cp_cmds=True,
 )
 
-rsgislib.tools.utils.write_list_to_file(cp_cmds, "cp_gmw_srtm_tiles.sh")
+cp_cmds_set = set(cp_cmds)
+cp_cmds_lst = list(cp_cmds_set)
+
+rsgislib.tools.utils.write_list_to_file(cp_cmds_lst, "cp_gmw_srtm_tiles.sh")
 
