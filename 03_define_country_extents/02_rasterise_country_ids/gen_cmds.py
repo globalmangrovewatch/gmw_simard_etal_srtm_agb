@@ -41,7 +41,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
                               countries_vec_lyr="National",
                               countries_vec_col="agb_allom_idx",
                               out_name="allom",
-                              out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/agb_allom/agb_allom_rasters')
+                              out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/agb_allom_rasters')
 
         self.pop_params_db()
         self.create_slurm_sub_sh("srtm_convert_kea", 8224, '/scratch/a.pfb/gmw_simard_etal_srtm_agb/logs',
