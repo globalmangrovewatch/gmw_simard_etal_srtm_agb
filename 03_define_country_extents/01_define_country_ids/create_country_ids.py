@@ -5,14 +5,14 @@ import numpy
 import osgeo.ogr as ogr
 import os
 
-out_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_UnqID.gpkg"
+out_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326_UnqID.gpkg"
 out_vec_lyr="National"
 
 if os.path.exists(out_vec_file):
     rsgislib.vectorutils.delete_vector_file(out_vec_file)
 
 rsgislib.vectorattrs.add_unq_numeric_col(
-    vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC.gpkg",
+    vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326.gpkg",
     vec_lyr="National",
     unq_col="gid_0",
     out_col="unqid",
