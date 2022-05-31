@@ -2,7 +2,10 @@ from pbprocesstools.pbpt_q_process import PBPTQProcessTool
 import logging
 import os
 import rsgislib
+import rsgislib.imageutils
+import rsgislib.vectorutils
 import rsgislib.vectorutils.createrasters
+import rsgislib.tools.geometrytools
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +15,25 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
-        rsgislib.vectorutils.createrasters.rasterise_vec_lyr(
-            vec_file=self.params["vec_file"],
-            vec_lyr=self.params["vec_lyr"],
-            input_img=self.params["srtm_tile"],
+
+        img_bbox = rsgislib.imageutils.get_img_bbox(self.params["srtm_tile"])
+        img_buf_bbox = rsgislib.tools.geometrytools.buffer_bbox(img_bbox, 1)
+
+        vec_ds_obj, vec_lyr_obj = rsgislib.vectorutils.open_gdal_vec_lyr(vec_file=self.params["vec_file"], vec_lyr=self.params["vec_lyr"], readonly=True)
+        vec_ds_sub_obj, vec_lyr_sub_obj = rsgislib.vectorutils.subset_envs_vec_lyr_obj(vec_lyr_obj=vec_lyr_obj, bbox=img_buf_bbox)
+        vec_ds_obj = None
+
+        rsgislib.imageutils.create_copy_img(self.params["srtm_tile"], self.params["out_img"], n_bands=1, pxl_val=0, gdalformat="KEA", datatype=rsgislib.TYPE_8UINT)
+
+        rsgislib.vectorutils.createrasters.rasterise_vec_lyr_obj(
+            vec_lyr_obj=vec_lyr_sub_obj,
             output_img=self.params["out_img"],
-            gdalformat="KEA",
             burn_val=1,
-            datatype=rsgislib.TYPE_8UINT,
             att_column=self.params["vec_col"],
             thematic=True,
             no_data_val=0,
         )
+        vec_ds_sub_obj = None
 
     def required_fields(self, **kwargs):
         return ["srtm_tile", "vec_file", "vec_lyr", "vec_col", "out_img"]
