@@ -64,7 +64,7 @@ for i, cntry_id in enumerate(ref_vals):
 
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "country_names", ogr.OFTString, cntry_names.tolist())
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", ogr.OFTString, agb_allom_rgns.tolist())
-rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", ogr.OFTInteger, agb_allom_rgns_idx.tolist())
+rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom_idx", ogr.OFTInteger, agb_allom_rgns_idx.tolist())
 
 rsgislib.tools.utils.write_dict_to_json(agb_allom_id_lut, "allom_id_lut.json")
 
