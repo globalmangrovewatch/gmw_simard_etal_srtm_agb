@@ -2,6 +2,7 @@ from pbprocesstools.pbpt_q_process import PBPTQProcessTool
 import logging
 import os
 import rsgislib
+import rsgislib.imagecalc
 import rsgislib.imageutils
 
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name='perform_analysis.py', descript=None)
 
     def do_processing(self, **kwargs):
-        rsgislib.imageutils.gdal_translate(self.params['srtm_tile'], self.params['out_img'], gdalformat='KEA')
+        rsgislib.imagecalc.image_math(self.params['srtm_tile'], self.params['out_img'], exp="b1", gdalformat="KEA", datatype=rsgislib.TYPE_16INT)
         rsgislib.imageutils.pop_img_stats(self.params['out_img'], use_no_data=True, no_data_val=-32768, calc_pyramids=True)
 
     def required_fields(self, **kwargs):
