@@ -164,8 +164,8 @@ def query_file_lut(
 
 
 
-srtm_lut_file = "./srtm_tiles_lut.gpkg"
-gmw_lut_file = "./gmw_union_tiles_lut.gpkg"
+srtm_lut_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
+gmw_lut_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_union_tiles_lut.gpkg"
 
 
 cp_cmds = query_file_lut(
