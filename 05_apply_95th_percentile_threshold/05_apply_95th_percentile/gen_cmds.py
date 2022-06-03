@@ -17,7 +17,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
         srtm_tiles = glob.glob(kwargs['srtm_tiles'])
         for srtm_tile in srtm_tiles:
             tile_base_name = rsgislib.tools.filetools.get_file_basename(srtm_tile)
-            percent95th_img = os.path.join(kwargs['out_path'], "{}_95thpercent.kea".format(tile_base_name))
+            percent95th_img = os.path.join(kwargs['percent95th'], "{}_95thpercent.kea".format(tile_base_name))
             out_img = os.path.join(kwargs['out_path'], "{}_95thp_thresholded.kea".format(tile_base_name))
             if not os.path.exists(out_img):
                 c_dict = dict()
