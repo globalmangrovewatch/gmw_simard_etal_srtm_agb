@@ -1,8 +1,9 @@
 import numpy
 import pickle
-import json
 import math
 import rsgislib.tools.utils
+import rsgislib.vectorattrs
+import osgeo.ogr as ogr
 
 histfile = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country_srtm_histograms.pkl"
 
@@ -32,4 +33,18 @@ for country_idx in hist_pklobj.keys():
 
 out_json_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country_srtm_95th_percentiles.json"
 rsgislib.tools.utils.write_dict_to_json(vals_95th, out_json_file)
+
+vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326_UnqID.gpkg"
+vec_lyr="National"
+
+ctry_uid = rsgislib.vectorattrs.read_vec_column(vec_file, vec_lyr, att_column="unqid")
+percent95th_vals = numpy.zeros_like(ctry_uid, dtype=float)
+
+for i, uid in enumerate(ctry_uid):
+    percent95th_vals[i] = vals_95th[uid]
+
+rsgislib.vectorattrs.write_vec_column(vec_file, vec_lyr, "percent95th", ogr.OFTReal, percent95th_vals.tolist())
+
+
+
 
