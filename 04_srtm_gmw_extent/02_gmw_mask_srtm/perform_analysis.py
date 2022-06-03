@@ -15,6 +15,7 @@ class PerformAnalysis(PBPTQProcessTool):
 
     def do_processing(self, **kwargs):
         gmw_count = rsgislib.imagecalc.count_pxls_of_val(input_img=self.params["gmw_img"], vals=[1])[0]
+        print(f"gmw_count: {gmw_count}")
         if gmw_count > 0:
             rsgislib.imageutils.mask_img(self.params["srtm_tile"], self.params["gmw_img"], self.params["out_img"], gdalformat="KEA", datatype=rsgislib.TYPE_16INT, out_value=-32768, mask_value=0)
             rsgislib.imageutils.pop_img_stats(self.params['out_img'], use_no_data=True, no_data_val=-32768, calc_pyramids=True)
