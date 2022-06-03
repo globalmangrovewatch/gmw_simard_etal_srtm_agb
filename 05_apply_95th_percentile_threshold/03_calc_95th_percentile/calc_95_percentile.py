@@ -41,7 +41,10 @@ ctry_uid = rsgislib.vectorattrs.read_vec_column(vec_file, vec_lyr, att_column="u
 percent95th_vals = numpy.zeros_like(ctry_uid, dtype=float)
 
 for i, uid in enumerate(ctry_uid):
-    percent95th_vals[i] = vals_95th[uid]
+    uid_str = f"{uid}"
+    if uid_str in vals_95th:
+        percent95th_vals[i] = vals_95th[uid_str]
+
 
 rsgislib.vectorattrs.write_vec_column(vec_file, vec_lyr, "percent95th", ogr.OFTReal, percent95th_vals.tolist())
 
