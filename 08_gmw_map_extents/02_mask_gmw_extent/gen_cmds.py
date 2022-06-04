@@ -19,7 +19,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
         for val_tile in val_tiles:
             tile_base_name = rsgislib.tools.filetools.get_file_basename(val_tile).replace(kwargs['rplc_val'], "")
             gmw_msk = os.path.join(kwargs['gmw_msk_dir'], "{}_gmw_v314_{}.kea".format(tile_base_name, kwargs['gmw_vec_lyr']))
-            out_img = os.path.join(kwargs['out_path'], "{}_agb_gmw_v314_{}.kea".format(tile_base_name, kwargs['gmw_vec_lyr']))
+            out_img = os.path.join(kwargs['out_path'], "{}{}{}.kea".format(tile_base_name, kwargs['out_name'], kwargs['gmw_vec_lyr']))
             if not os.path.exists(out_img):
                 c_dict = dict()
                 c_dict['val_tile'] = val_tile
