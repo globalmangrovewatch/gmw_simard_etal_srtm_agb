@@ -33,7 +33,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
         vec_lyrs = rsgislib.vectorutils.get_vec_lyrs_lst(vec_file)
         for vec_lyr in vec_lyrs:
             self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/gmw_srtm_kea/*.kea',
-                                  gmw_vec_file=vec_lyrs,
+                                  gmw_vec_file=vec_file,
                                   gmw_vec_lyr=vec_lyr,
                                   out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/{}'.format(vec_lyr))
 
