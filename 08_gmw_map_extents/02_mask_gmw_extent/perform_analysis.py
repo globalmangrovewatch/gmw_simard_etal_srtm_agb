@@ -12,7 +12,7 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
-        rsgislib.imageutils.mask_img(self.params["agb_tile"], self.params["gmw_msk"], self.params["out_img"], "KEA", rsgislib.TYPE_32FLOAT, 0, 0)
+        rsgislib.imageutils.mask_img(self.params["val_tile"], self.params["gmw_msk"], self.params["out_img"], "KEA", rsgislib.TYPE_32FLOAT, 0, 0)
         rsgislib.imageutils.pop_img_stats(self.params["out_img"], use_no_data=True, no_data_val=0, calc_pyramids=True)
 
     def required_fields(self, **kwargs):
