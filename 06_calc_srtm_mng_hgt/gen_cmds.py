@@ -11,8 +11,12 @@ logger = logging.getLogger(__name__)
 class GenTaskCmds(PBPTGenQProcessToolCmds):
 
     def gen_command_info(self, **kwargs):
-        if not os.path.exists(kwargs['out_path']):
-            os.mkdir(kwargs['out_path'])
+        if not os.path.exists(kwargs['out_hba_path']):
+            os.mkdir(kwargs['out_hba_path'])
+        if not os.path.exists(kwargs['out_hchm_path']):
+            os.mkdir(kwargs['out_hchm_path'])
+        if not os.path.exists(kwargs['out_hmax_path']):
+            os.mkdir(kwargs['out_hmax_path'])
 
         srtm_tiles = glob.glob(kwargs['srtm_tiles'])
         for srtm_tile in srtm_tiles:
