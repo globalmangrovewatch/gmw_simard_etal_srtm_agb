@@ -34,15 +34,15 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
                                   out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_agb/agb_{}_tif'.format(vec_lyr))
 
         for vec_lyr in vec_lyrs:
-            self.gen_command_info(val_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hmax_{}/*.kea'.format(vec_lyr),
+            self.gen_command_info(img_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hmax_{}/*.kea'.format(vec_lyr),
                                   out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hmax_{}_tif'.format(vec_lyr))
 
         for vec_lyr in vec_lyrs:
-            self.gen_command_info(val_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hba_{}/*.kea'.format(vec_lyr),
+            self.gen_command_info(img_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hba_{}/*.kea'.format(vec_lyr),
                                   out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hba_{}_tif'.format(vec_lyr))
 
         for vec_lyr in vec_lyrs:
-            self.gen_command_info(val_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hchm_{}/*.kea'.format(vec_lyr),
+            self.gen_command_info(img_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hchm_{}/*.kea'.format(vec_lyr),
                                   out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hchm_{}_tif'.format(vec_lyr))
 
         self.pop_params_db()
