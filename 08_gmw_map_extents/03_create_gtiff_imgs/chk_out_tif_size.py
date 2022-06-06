@@ -38,6 +38,9 @@ def rm_files_size_gt(file_path:str, file_srch:str, min_size:int, rm_file:bool=Fa
 
 vec_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_v3_fnl_mjr_v314.gpkg"
 
+size_thres = 10000000
+
+
 vec_lyrs = rsgislib.vectorutils.get_vec_lyrs_lst(vec_file)
 for vec_lyr in vec_lyrs:
     print(vec_lyr)

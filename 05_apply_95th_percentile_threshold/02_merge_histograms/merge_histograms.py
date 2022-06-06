@@ -2,16 +2,18 @@ import rsgislib.tools.utils
 import numpy
 import pickle
 import glob
+import pprint
 
 countries_lut_file = "../../03_define_country_extents/01_define_country_ids/country_ids_lut.json"
 countries_lut = rsgislib.tools.utils.read_json_to_dict(countries_lut_file)
 
-countries_idxs = list(countries_lut.keys())
+countries_idxs = list(countries_lut['val'].keys())
 print(countries_idxs)
 
 countries_hists = dict()
 for country_idx in countries_idxs:
     countries_hists[country_idx] = numpy.zeros(70, dtype=int)
+
 
 tile_hist_files = glob.glob('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/cnty_tile_hists/*.pkl')
 
@@ -28,4 +30,6 @@ countries_hist_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country
 
 with open(countries_hist_file, 'wb') as out_pkl_obj:
     pickle.dump(countries_hists, out_pkl_obj, protocol=pickle.HIGHEST_PROTOCOL)
+
+pprint.pprint(countries_hists)
 
