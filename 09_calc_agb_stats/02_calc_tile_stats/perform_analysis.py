@@ -68,6 +68,7 @@ class PerformAnalysis(PBPTQProcessTool):
 
         tile_stats_lut = dict()
         for gmw_year in self.params["gmw_ext_imgs"]:
+            print(gmw_year)
             gmw_ext_img = self.params["gmw_ext_imgs"][gmw_year]
 
             lut_vals = dict()
