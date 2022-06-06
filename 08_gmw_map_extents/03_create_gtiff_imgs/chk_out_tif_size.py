@@ -44,21 +44,21 @@ size_thres = 10000000
 vec_lyrs = rsgislib.vectorutils.get_vec_lyrs_lst(vec_file)
 for vec_lyr in vec_lyrs:
     print(vec_lyr)
-    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_agb/agb_{}_tif'.format(vec_lyr), '*.tif', 1000000, rm_file=True, rm_use_basename=True)
+    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_agb/agb_{}_tif'.format(vec_lyr), '*.tif', size_thres, rm_file=True, rm_use_basename=True)
 print("")
 
 for vec_lyr in vec_lyrs:
     print(vec_lyr)
-    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hmax_{}_tif'.format(vec_lyr), '*.tif', 1000000, rm_file=True, rm_use_basename=True)
+    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hmax_{}_tif'.format(vec_lyr), '*.tif', size_thres, rm_file=True, rm_use_basename=True)
 print("")
 
 for vec_lyr in vec_lyrs:
     print(vec_lyr)
-    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hba_{}_tif'.format(vec_lyr), '*.tif', 1000000, rm_file=True, rm_use_basename=True)
+    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hba_{}_tif'.format(vec_lyr), '*.tif', size_thres, rm_file=True, rm_use_basename=True)
 print("")
 
 for vec_lyr in vec_lyrs:
     print(vec_lyr)
-    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hchm_{}_tif'.format(vec_lyr), '*.tif', 1000000, rm_file=True, rm_use_basename=True)
+    rm_files_size_gt('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw_srtm_mangrove_hgt/hchm_{}_tif'.format(vec_lyr), '*.tif', size_thres, rm_file=True, rm_use_basename=True)
 print("")
 
