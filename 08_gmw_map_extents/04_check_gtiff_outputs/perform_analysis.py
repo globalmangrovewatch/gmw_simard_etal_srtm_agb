@@ -4,6 +4,7 @@ import os
 import rsgislib
 import rsgislib.imagecalc
 import rsgislib.tools.utils
+import rsgislib.tools.filetools
 
 logger = logging.getLogger(__name__)
 
@@ -14,9 +15,9 @@ class PerformAnalysis(PBPTQProcessTool):
 
     def do_processing(self, **kwargs):
         if os.path.exists(self.params['tif_img']):
-            match, prop_diff = rsgislib.imagecalc.are_imgs_equal(self.params['img_tile'], self.params['tif_img'], prop_eql=1.0, flt_dif=0.0001)
+            match, prop_diff = rsgislib.imagecalc.are_imgs_equal(self.params['img_tile'], self.params['tif_img'], prop_eql=1.0, flt_dif=0.01)
             if not match:
-                os.remove(self.params['tif_img'])
+                rsgislib.tools.filetools.delete_file_with_basename(self.params['tif_img'])
             else:
                 match_info = dict()
                 match_info['match'] = match
