@@ -56,6 +56,6 @@ for year in gmw_years:
 df_stats = pandas.DataFrame.from_dict(out_data)
 df_stats.to_csv("gmw_v314_agb_stats.csv")
 df_stats.to_feather("gmw_v314_agb_stats.feather")
-xlsx_writer = pandas.ExcelWriter("gmw_v314_agb_stats.xslx", engine='xlsxwriter')
+xlsx_writer = pandas.ExcelWriter("gmw_v314_agb_stats.xlsx", engine='xlsxwriter')
 df_stats.to_excel(xlsx_writer, sheet_name='gmw_agb_stats')
 xlsx_writer.save()
