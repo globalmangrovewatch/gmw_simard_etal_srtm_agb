@@ -16,22 +16,30 @@ out_data = dict()
 out_data['Country'] = list()
 out_data['Country_Code'] = list()
 
-
 for year in gmw_years:
     out_data[f'{year}_agb_tot'] = list()
     out_data[f'{year}_agb_avg'] = list()
     out_data[f'{year}_count'] = list()
     out_data[f'{year}_area'] = list()
-    for cntry_id in country_agb_stats_lut[year]:
-        if country_agb_stats_lut[year][cntry_id]['count'] > 0:
-            cntry_code = country_ids_lut['val'][cntry_id]
-            out_data['Country_Code'].append(cntry_code)
-            out_data['Country'].append(gadm_lut['gid'][cntry_code])
 
+for cntry_id in country_ids_lut["val"].keys():
+    have_data = False
+    for year in gmw_years:
+        if country_agb_stats_lut[year][cntry_id]['count'] > 0:
+            have_data = True
+            break
+
+    if have_data:
+        cntry_code = country_ids_lut['val'][cntry_id]
+        out_data['Country_Code'].append(cntry_code)
+        out_data['Country'].append(gadm_lut['gid'][cntry_code])
+
+        for year in gmw_years:
             out_data[f'{year}_count'].append(country_agb_stats_lut[year][cntry_id]['count'])
             out_data[f'{year}_area'].append(country_agb_stats_lut[year][cntry_id]['area'])
             out_data[f'{year}_agb_avg'].append(country_agb_stats_lut[year][cntry_id]['vals']/country_agb_stats_lut[year][cntry_id]['count'])
             out_data[f'{year}_agb_tot'].append(country_agb_stats_lut[year][cntry_id]['vals_area'])
+
 
 
 print('Country: {}'.format(len(out_data['Country'])))
