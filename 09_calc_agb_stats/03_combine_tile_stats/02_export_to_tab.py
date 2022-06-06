@@ -14,7 +14,7 @@ gmw_years = ['1996', '2007', '2008', '2009', '2010', '2015', '2016', '2017', '20
 
 out_data = dict()
 out_data['Country'] = list()
-out_data['Country Code'] = list()
+out_data['Country_Code'] = list()
 
 
 for year in gmw_years:
@@ -25,12 +25,24 @@ for year in gmw_years:
     for cntry_id in country_agb_stats_lut[year]:
         if country_agb_stats_lut[year][cntry_id]['count'] > 0:
             cntry_code = country_ids_lut['val'][cntry_id]
-            out_data['Country Code'].append(cntry_code)
+            out_data['Country_Code'].append(cntry_code)
             out_data['Country'].append(gadm_lut['gid'][cntry_code])
+
             out_data[f'{year}_count'].append(country_agb_stats_lut[year][cntry_id]['count'])
             out_data[f'{year}_area'].append(country_agb_stats_lut[year][cntry_id]['area'])
             out_data[f'{year}_agb_avg'].append(country_agb_stats_lut[year][cntry_id]['vals']/country_agb_stats_lut[year][cntry_id]['count'])
             out_data[f'{year}_agb_tot'].append(country_agb_stats_lut[year][cntry_id]['vals_area'])
+
+
+print('Country: {}'.format(len(out_data['Country'])))
+print('Country_Code: {}'.format(len(out_data['Country_Code'])))
+
+for year in gmw_years:
+    print('{}_agb_tot: {}'.format(year, len(out_data[f'{year}_agb_tot'])))
+    print('{}_agb_avg: {}'.format(year, len(out_data[f'{year}_agb_avg'])))
+    print('{}_count: {}'.format(year, len(out_data[f'{year}_count'])))
+    print('{}_area: {}'.format(year, len(out_data[f'{year}_area'])))
+    print("")
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)
