@@ -20,7 +20,7 @@ class PerformAnalysis(PBPTQProcessTool):
                 rsgislib.tools.filetools.delete_file_with_basename(self.params['tif_img'])
             else:
                 match_info = dict()
-                match_info['match'] = match
+                match_info['match'] = bool(match)
                 match_info['prop_diff'] = float(prop_diff)
                 rsgislib.tools.utils.write_dict_to_json(match_info, self.params['out_file'])
 
