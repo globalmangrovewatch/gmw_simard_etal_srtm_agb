@@ -65,9 +65,7 @@ class PerformAnalysis(PBPTQProcessTool):
                 val = int(val)
                 lut_vals[val] = dict()
                 lut_vals[val]['count'] = 0
-                lut_vals[val]['area'] = 0.0
                 lut_vals[val]['vals'] = 0.0
-                lut_vals[val]['vals_area'] = 0.0
 
             calc_unq_val_pxl_areas(self.params["agb_tile"], self.params["cntry_img"], gmw_ext_img, lut_vals)
 
