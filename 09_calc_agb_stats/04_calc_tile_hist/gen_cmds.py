@@ -17,10 +17,11 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
 
         agb_tiles = glob.glob(kwargs['agb_tiles'])
         for agb_tile in agb_tiles:
-            tile_base_name = rsgislib.tools.filetools.get_file_basename(agb_tile).replace("_agb_gmw_v314_mng_mjr_2020", "")
+            tile_agb_name = rsgislib.tools.filetools.get_file_basename(agb_tile)
+            tile_base_name = tile_agb_name.replace("_agb_gmw_v314_mng_mjr_2020", "")
             cntry_img = os.path.join(kwargs['cntry_uid_dir'], "{}_cnty.kea".format(tile_base_name))
 
-            out_file = os.path.join(kwargs['out_path'], "{}_gmw_v314_agb_stats.json".format(tile_base_name))
+            out_file = os.path.join(kwargs['out_path'], "{}_country_hists.json".format(tile_agb_name))
             if not os.path.exists(out_file):
                 c_dict = dict()
                 c_dict['agb_tile'] = agb_tile
@@ -38,7 +39,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
 
         self.pop_params_db()
 
-        self.create_shell_exe(run_script="run_exe_analysis.sh", cmds_sh_file="cmds_lst.sh", n_cores=20, db_info_file=None)
+        self.create_shell_exe(run_script="run_exe_analysis.sh", cmds_sh_file="cmds_lst.sh", n_cores=20, db_info_file="gmw_agb_db_conn_info.json")
 
 
 if __name__ == "__main__":
