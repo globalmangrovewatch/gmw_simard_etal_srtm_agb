@@ -35,7 +35,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
                               cntry_uid_dir='/home/pete/Documents/gmw_v3_agb_hgt/countries/srtm_rasters',
                               country_ids_lut_file='../../03_define_country_extents/01_define_country_ids/country_ids_lut.json',
                               gmw_extent_dirs='/home/pete/Documents/gmw_v3_agb_hgt/gmw/mng_mjr_2020',
-                              out_path='/home/pete/Documents/gmw_v3_agb_hgt/stats/hist_tile_stats')
+                              out_path='/home/pete/Documents/gmw_v3_agb_hgt/stats/hist_agb_tile_stats')
 
         self.pop_params_db()
 
