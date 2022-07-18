@@ -25,16 +25,17 @@ out_data['1250-'] = list()
 
 for cntry_id in country_ids_lut["val"].keys():
     country_agb_arr = numpy.array(country_agb_stats_lut[cntry_id], dtype=numpy.uint32)
-    if numpy.sum(country_agb_arr) > 0:
+    tot_country_agb = numpy.sum(country_agb_arr)
+    if tot_country_agb > 0:
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)
         out_data['Country'].append(gadm_lut['gid'][cntry_code])
-        out_data['0-250'].append(numpy.sum(country_agb_arr[0:10]))
-        out_data['250-500'].append(numpy.sum(country_agb_arr[10:20]))
-        out_data['500-750'].append(numpy.sum(country_agb_arr[20:30]))
-        out_data['750-1000'].append(numpy.sum(country_agb_arr[30:40]))
-        out_data['1000-1250'].append(numpy.sum(country_agb_arr[40:50]))
-        out_data['1250-'].append(numpy.sum(country_agb_arr[50:]))
+        out_data['0-250'].append(numpy.sum(country_agb_arr[0:10])/tot_country_agb)
+        out_data['250-500'].append(numpy.sum(country_agb_arr[10:20])/tot_country_agb)
+        out_data['500-750'].append(numpy.sum(country_agb_arr[20:30])/tot_country_agb)
+        out_data['750-1000'].append(numpy.sum(country_agb_arr[30:40])/tot_country_agb)
+        out_data['1000-1250'].append(numpy.sum(country_agb_arr[40:50])/tot_country_agb)
+        out_data['1250-'].append(numpy.sum(country_agb_arr[50:])/tot_country_agb)
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)

@@ -25,16 +25,17 @@ out_data['65-'] = list()
 
 for cntry_id in country_ids_lut["val"].keys():
     country_hchm_arr = numpy.array(country_hchm_stats_lut[cntry_id], dtype=numpy.uint32)
-    if numpy.sum(country_hchm_arr) > 0:
+    tot_country_hchm = numpy.sum(country_hchm_arr)
+    if tot_country_hchm > 0:
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)
         out_data['Country'].append(gadm_lut['gid'][cntry_code])
-        out_data['0-13'].append(numpy.sum(country_hchm_arr[0:13]))
-        out_data['13-26'].append(numpy.sum(country_hchm_arr[13:26]))
-        out_data['26-39'].append(numpy.sum(country_hchm_arr[26:39]))
-        out_data['39-52'].append(numpy.sum(country_hchm_arr[39:52]))
-        out_data['52-65'].append(numpy.sum(country_hchm_arr[52:65]))
-        out_data['65-'].append(numpy.sum(country_hchm_arr[65:]))
+        out_data['0-13'].append(numpy.sum(country_hchm_arr[0:13])/tot_country_hchm)
+        out_data['13-26'].append(numpy.sum(country_hchm_arr[13:26])/tot_country_hchm)
+        out_data['26-39'].append(numpy.sum(country_hchm_arr[26:39])/tot_country_hchm)
+        out_data['39-52'].append(numpy.sum(country_hchm_arr[39:52])/tot_country_hchm)
+        out_data['52-65'].append(numpy.sum(country_hchm_arr[52:65])/tot_country_hchm)
+        out_data['65-'].append(numpy.sum(country_hchm_arr[65:])/tot_country_hchm)
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)
