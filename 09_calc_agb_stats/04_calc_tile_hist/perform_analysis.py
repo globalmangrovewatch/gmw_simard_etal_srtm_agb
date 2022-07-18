@@ -36,8 +36,12 @@ def calc_unq_val_pxl_areas(vals_img, uid_img, unq_val_area_lut):
 
             if numpy.sum(msk) > 0:
                 vals_unq_val_arr = vals_arr[msk].flatten()
-                vals_hist = numpy.histogram(vals_unq_val_arr, bins=71, range=(0, 70))
-                unq_val_area_lut[unq_val]['vals'] = unq_val_area_lut[unq_val]['vals'] + vals_hist
+                print(vals_unq_val_arr.shape)
+                vals_hist, bin_edges = numpy.histogram(vals_unq_val_arr, bins=71, range=(0, 71))
+                print(bin_edges)
+                print(vals_hist.shape)
+                print(unq_val_area_lut[unq_val].shape)
+                unq_val_area_lut[unq_val] = unq_val_area_lut[unq_val] + vals_hist
 
 
 class PerformAnalysis(PBPTQProcessTool):
@@ -52,11 +56,11 @@ class PerformAnalysis(PBPTQProcessTool):
         lut_vals = dict()
         for val in unq_vals:
             val = int(val)
-            lut_vals[val] = numpy.arange(0, 71, 1)
+            lut_vals[val] = numpy.zeros((100), dtype=numpy.uint32)
 
         calc_unq_val_pxl_areas(self.params["agb_tile"], self.params["cntry_img"], lut_vals)
 
-        rsgislib.tools.utils.write_dict_to_json(tile_stats_lut, self.params["out_file"])
+        rsgislib.tools.utils.write_dict_to_json(lut_vals, self.params["out_file"])
 
 
     def required_fields(self, **kwargs):
