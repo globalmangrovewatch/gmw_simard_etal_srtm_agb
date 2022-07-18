@@ -18,7 +18,7 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
         agb_tiles = glob.glob(kwargs['agb_tiles'])
         for agb_tile in agb_tiles:
             tile_agb_name = rsgislib.tools.filetools.get_file_basename(agb_tile)
-            tile_base_name = tile_agb_name.replace("_agb_gmw_v314_mng_mjr_2020", "")
+            tile_base_name = tile_agb_name.replace("_hchm_gmw_v314_mng_mjr_2020", "")
             cntry_img = os.path.join(kwargs['cntry_uid_dir'], "{}_cnty.kea".format(tile_base_name))
 
             out_file = os.path.join(kwargs['out_path'], "{}_country_hists.json".format(tile_agb_name))
@@ -31,11 +31,11 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
                 self.params.append(c_dict)
 
     def run_gen_commands(self):
-        self.gen_command_info(agb_tiles='/home/pete/Documents/gmw_v3_agb_hgt/gmw_srtm_mangrove_agb/agb_mng_mjr_2020_tif/*.tif',
+        self.gen_command_info(agb_tiles='/home/pete/Documents/gmw_v3_agb_hgt/gmw_srtm_mangrove_hgt/hchm_mng_mjr_2020_tif/*.tif',
                               cntry_uid_dir='/home/pete/Documents/gmw_v3_agb_hgt/countries/srtm_rasters',
                               country_ids_lut_file='../../03_define_country_extents/01_define_country_ids/country_ids_lut.json',
                               gmw_extent_dirs='/home/pete/Documents/gmw_v3_agb_hgt/gmw/mng_mjr_2020',
-                              out_path='/home/pete/Documents/gmw_v3_agb_hgt/stats/hist_tile_stats')
+                              out_path='/home/pete/Documents/gmw_v3_agb_hgt/stats/hist_hchm_tile_stats')
 
         self.pop_params_db()
 
