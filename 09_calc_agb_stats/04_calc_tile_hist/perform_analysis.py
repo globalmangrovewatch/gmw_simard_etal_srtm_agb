@@ -36,11 +36,12 @@ def calc_unq_val_pxl_areas(vals_img, uid_img, unq_val_area_lut):
 
             if numpy.sum(msk) > 0:
                 vals_unq_val_arr = vals_arr[msk].flatten()
-                print(vals_unq_val_arr.shape)
+                #print(vals_unq_val_arr.shape)
                 vals_hist, bin_edges = numpy.histogram(vals_unq_val_arr, bins=81, range=(0, 2025))
-                print(bin_edges)
-                print(vals_hist.shape)
-                print(unq_val_area_lut[unq_val].shape)
+                #print(bin_edges)
+                #print(vals_hist.shape)
+                #print(unq_val_area_lut[unq_val].shape)
+                #print(vals_hist)
                 unq_val_area_lut[unq_val] = unq_val_area_lut[unq_val] + vals_hist
 
 
