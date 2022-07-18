@@ -24,7 +24,7 @@ out_data['1250-'] = list()
 
 
 for cntry_id in country_ids_lut["val"].keys():
-    country_agb_arr = numpy.array(country_agb_stats_lut, dtype=numpy.uint32)
+    country_agb_arr = numpy.array(country_agb_stats_lut[cntry_id], dtype=numpy.uint32)
     if numpy.sum(country_agb_arr) > 0:
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)

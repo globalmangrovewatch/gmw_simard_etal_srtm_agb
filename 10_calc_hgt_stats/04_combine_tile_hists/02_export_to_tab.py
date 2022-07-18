@@ -8,8 +8,8 @@ country_ids_lut = rsgislib.tools.utils.read_json_to_dict(country_ids_lut_file)
 gadm_lut_file ='../../03_define_country_extents/01_define_country_ids/gadm_lut.json'
 gadm_lut = rsgislib.tools.utils.read_json_to_dict(gadm_lut_file)
 
-country_agb_stats_file = '/home/pete/Documents/gmw_v3_agb_hgt/stats/country_hchm_hists.json'
-country_agb_stats_lut = rsgislib.tools.utils.read_json_to_dict(country_agb_stats_file)
+country_hchm_stats_file = '/home/pete/Documents/gmw_v3_agb_hgt/stats/country_hchm_hists.json'
+country_hchm_stats_lut = rsgislib.tools.utils.read_json_to_dict(country_hchm_stats_file)
 
 
 out_data = dict()
@@ -24,17 +24,17 @@ out_data['65-'] = list()
 
 
 for cntry_id in country_ids_lut["val"].keys():
-    country_agb_arr = numpy.array(country_agb_stats_lut, dtype=numpy.uint32)
-    if numpy.sum(country_agb_arr) > 0:
+    country_hchm_arr = numpy.array(country_hchm_stats_lut[cntry_id], dtype=numpy.uint32)
+    if numpy.sum(country_hchm_arr) > 0:
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)
         out_data['Country'].append(gadm_lut['gid'][cntry_code])
-        out_data['0-13'].append(numpy.sum(country_agb_arr[0:13]))
-        out_data['13-26'].append(numpy.sum(country_agb_arr[13:26]))
-        out_data['26-39'].append(numpy.sum(country_agb_arr[26:39]))
-        out_data['39-52'].append(numpy.sum(country_agb_arr[39:52]))
-        out_data['52-65'].append(numpy.sum(country_agb_arr[52:65]))
-        out_data['65-'].append(numpy.sum(country_agb_arr[65:]))
+        out_data['0-13'].append(numpy.sum(country_hchm_arr[0:13]))
+        out_data['13-26'].append(numpy.sum(country_hchm_arr[13:26]))
+        out_data['26-39'].append(numpy.sum(country_hchm_arr[26:39]))
+        out_data['39-52'].append(numpy.sum(country_hchm_arr[39:52]))
+        out_data['52-65'].append(numpy.sum(country_hchm_arr[52:65]))
+        out_data['65-'].append(numpy.sum(country_hchm_arr[65:]))
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)
