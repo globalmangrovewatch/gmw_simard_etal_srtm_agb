@@ -8,7 +8,7 @@ country_ids_lut = rsgislib.tools.utils.read_json_to_dict(country_ids_lut_file)
 gadm_lut_file ='../../03_define_country_extents/01_define_country_ids/gadm_lut.json'
 gadm_lut = rsgislib.tools.utils.read_json_to_dict(gadm_lut_file)
 
-country_hchm_stats_file = '/home/pete/Documents/gmw_v3_agb_hgt/stats/country_hchm_hists.json'
+country_hchm_stats_file = 'country_hchm_hists.json'
 country_hchm_stats_lut = rsgislib.tools.utils.read_json_to_dict(country_hchm_stats_file)
 
 
