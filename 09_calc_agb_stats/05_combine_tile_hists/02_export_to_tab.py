@@ -15,12 +15,11 @@ country_agb_stats_lut = rsgislib.tools.utils.read_json_to_dict(country_agb_stats
 out_data = dict()
 out_data['Country'] = list()
 out_data['Country_Code'] = list()
-out_data['0-250'] = list()
-out_data['250-500'] = list()
-out_data['500-750'] = list()
-out_data['750-1000'] = list()
-out_data['1000-1250'] = list()
-out_data['1250-'] = list()
+out_data['0-50'] = list()
+out_data['50-100'] = list()
+out_data['100-150'] = list()
+out_data['150-250'] = list()
+out_data['250-1500'] = list()
 
 
 for cntry_id in country_ids_lut["val"].keys():
@@ -30,12 +29,11 @@ for cntry_id in country_ids_lut["val"].keys():
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)
         out_data['Country'].append(gadm_lut['gid'][cntry_code])
-        out_data['0-250'].append(numpy.sum(country_agb_arr[0:10])/tot_country_agb)
-        out_data['250-500'].append(numpy.sum(country_agb_arr[10:20])/tot_country_agb)
-        out_data['500-750'].append(numpy.sum(country_agb_arr[20:30])/tot_country_agb)
-        out_data['750-1000'].append(numpy.sum(country_agb_arr[30:40])/tot_country_agb)
-        out_data['1000-1250'].append(numpy.sum(country_agb_arr[40:50])/tot_country_agb)
-        out_data['1250-'].append(numpy.sum(country_agb_arr[50:])/tot_country_agb)
+        out_data['0-50'].append(numpy.sum(country_agb_arr[0:2])/tot_country_agb)
+        out_data['50-100'].append(numpy.sum(country_agb_arr[2:4])/tot_country_agb)
+        out_data['100-150'].append(numpy.sum(country_agb_arr[4:6])/tot_country_agb)
+        out_data['150-250'].append(numpy.sum(country_agb_arr[6:10])/tot_country_agb)
+        out_data['250-1500'].append(numpy.sum(country_agb_arr[10:])/tot_country_agb)
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)

@@ -15,12 +15,11 @@ country_hchm_stats_lut = rsgislib.tools.utils.read_json_to_dict(country_hchm_sta
 out_data = dict()
 out_data['Country'] = list()
 out_data['Country_Code'] = list()
-out_data['0-13'] = list()
-out_data['13-26'] = list()
-out_data['26-39'] = list()
-out_data['39-52'] = list()
-out_data['52-65'] = list()
-out_data['65-'] = list()
+out_data['0-5'] = list()
+out_data['5-10'] = list()
+out_data['10-15'] = list()
+out_data['15-20'] = list()
+out_data['20-65'] = list()
 
 
 for cntry_id in country_ids_lut["val"].keys():
@@ -30,12 +29,11 @@ for cntry_id in country_ids_lut["val"].keys():
         cntry_code = country_ids_lut['val'][cntry_id]
         out_data['Country_Code'].append(cntry_code)
         out_data['Country'].append(gadm_lut['gid'][cntry_code])
-        out_data['0-13'].append(numpy.sum(country_hchm_arr[0:13])/tot_country_hchm)
-        out_data['13-26'].append(numpy.sum(country_hchm_arr[13:26])/tot_country_hchm)
-        out_data['26-39'].append(numpy.sum(country_hchm_arr[26:39])/tot_country_hchm)
-        out_data['39-52'].append(numpy.sum(country_hchm_arr[39:52])/tot_country_hchm)
-        out_data['52-65'].append(numpy.sum(country_hchm_arr[52:65])/tot_country_hchm)
-        out_data['65-'].append(numpy.sum(country_hchm_arr[65:])/tot_country_hchm)
+        out_data['0-5'].append(numpy.sum(country_hchm_arr[0:5])/tot_country_hchm)
+        out_data['5-10'].append(numpy.sum(country_hchm_arr[5:10])/tot_country_hchm)
+        out_data['10-15'].append(numpy.sum(country_hchm_arr[10:15])/tot_country_hchm)
+        out_data['15-20'].append(numpy.sum(country_hchm_arr[15:20])/tot_country_hchm)
+        out_data['20-65'].append(numpy.sum(country_hchm_arr[20:])/tot_country_hchm)
 
 
 df_stats = pandas.DataFrame.from_dict(out_data)
