@@ -28,10 +28,15 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
 
     def run_gen_commands(self):
 
+        #self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/gmw_kea/*.kea',
+        #                      gmw_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_v3_mjr_union_core_v314.gpkg",
+        #                      gmw_vec_lyr="mng_union",
+        #                      out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_union_srtm_rasters')
+
         self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/gmw_kea/*.kea',
                               gmw_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_v3_mjr_union_core_v314.gpkg",
-                              gmw_vec_lyr="mng_union",
-                              out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_union_srtm_rasters')
+                              gmw_vec_lyr="mng_core",
+                              out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_core_srtm_rasters')
 
         self.pop_params_db()
         self.create_slurm_sub_sh("rasterise_gmw_to_srtm", 8224, '/scratch/a.pfb/gmw_simard_etal_srtm_agb/logs',
