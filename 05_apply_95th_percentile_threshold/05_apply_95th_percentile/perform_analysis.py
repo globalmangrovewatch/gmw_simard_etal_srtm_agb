@@ -13,10 +13,12 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
+        rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
+
         band_defns = list()
         band_defns.append(rsgislib.imagecalc.BandDefn('srtm', self.params["srtm_tile"], 1))
         band_defns.append(rsgislib.imagecalc.BandDefn('thres', self.params["percent95th_img"], 1))
-        rsgislib.imagecalc.band_math(self.params["out_img"], 'srtm>thres?thres:srtm', 'KEA', rsgislib.TYPE_16INT, band_defns)
+        rsgislib.imagecalc.band_math(self.params["out_img"], 'srtm>thres?thres:srtm', 'GTIFF', rsgislib.TYPE_16INT, band_defns)
 
         rsgislib.imageutils.pop_img_stats(self.params['out_img'], use_no_data=True, no_data_val=-32768, calc_pyramids=True)
 

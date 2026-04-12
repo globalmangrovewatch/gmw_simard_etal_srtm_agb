@@ -8,7 +8,7 @@ import rsgislib.tools.filetools
 
 logger = logging.getLogger(__name__)
 
-class GenTaskCmds(PBPTGenQProcessToolCmds):
+class GenCmds(PBPTGenQProcessToolCmds):
 
     def gen_command_info(self, **kwargs):
         if not os.path.exists(kwargs['out_path']):
@@ -17,8 +17,8 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
         srtm_tiles = glob.glob(kwargs['srtm_tiles'])
         for srtm_tile in srtm_tiles:
             tile_base_name = rsgislib.tools.filetools.get_file_basename(srtm_tile)
-            percent95th_img = os.path.join(kwargs['percent95th'], "{}_95thpercent.kea".format(tile_base_name))
-            out_img = os.path.join(kwargs['out_path'], "{}_95thp_thresholded.kea".format(tile_base_name))
+            percent95th_img = os.path.join(kwargs['percent95th'], "{}_95thpercent.tif".format(tile_base_name))
+            out_img = os.path.join(kwargs['out_path'], "{}_95thp_thresholded.tif".format(tile_base_name))
             if not os.path.exists(out_img):
                 c_dict = dict()
                 c_dict['srtm_tile'] = srtm_tile
@@ -28,26 +28,31 @@ class GenTaskCmds(PBPTGenQProcessToolCmds):
 
     def run_gen_commands(self):
 
-        self.gen_command_info(srtm_tiles='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/gmw_srtm_kea/*.kea',
-                              percent95th="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/srtm_95th_percent_thres",
-                              out_path='/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/srtm_95thpercent')
-
+        self.gen_command_info(srtm_tiles='/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_v4109_2000_srtm_tiles/*.tif',
+                              percent95th="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_95th_percent_thres",
+                              out_path='/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_95th_percent_thresholded')
 
         self.pop_params_db()
-        self.create_slurm_sub_sh("apply_95th_percent", 8224, '/scratch/a.pfb/gmw_simard_etal_srtm_agb/logs',
-                                 run_script='run_exe_analysis.sh', job_dir="job_scripts",
-                                 db_info_file="db_info_run_file.txt", account_name='scw1376',
-                                 n_cores_per_job=10, n_jobs=10, job_time_limit='2-23:59',
-                                 module_load='module load parallel singularity\n\nexport http_proxy="http://a.pfb:proxy101019@10.212.63.246:3128"\nexport https_proxy="http://a.pfb:proxy101019@10.212.63.246:3128"\n')
+
+        self.create_shell_exe(
+                run_script="run_exe_analysis.sh",  # The file to call to run analysis
+                cmds_sh_file="pbpt_cmds_lst.sh",  # The list of commands to be run.
+                n_cores=40,  # The number of cores to use for analysis.
+                db_info_file="pbpt_lcl_db_info.json",
+        )
 
 if __name__ == "__main__":
     py_script = os.path.abspath("perform_analysis.py")
-    script_cmd = "singularity exec --bind /scratch/a.pfb:/scratch/a.pfb --bind /home/a.pfb:/home/a.pfb /scratch/a.pfb/sw_imgs/au-eoed-dev.sif python {}".format(py_script)
+    script_cmd = f"python {py_script}"
 
-    process_tools_mod = 'perform_analysis'
-    process_tools_cls = 'PerformAnalysis'
+    process_tools_mod = "perform_analysis"
+    process_tools_cls = "PerformAnalysis"
 
-    create_tools = GenTaskCmds(cmd=script_cmd, db_conn_file="/home/a.pfb/gmw_gap_fill_db/pbpt_db_conn.txt",
-                                         lock_file_path="./gmw_agb_lock_file.txt",
-                                         process_tools_mod=process_tools_mod, process_tools_cls=process_tools_cls)
+    create_tools = GenCmds(
+            cmd=script_cmd,
+            db_conn_file="/home/pete/.pbpt_db_conn.txt",
+            lock_file_path="./pbpt_lock_file.txt",
+            process_tools_mod=process_tools_mod,
+            process_tools_cls=process_tools_cls,
+    )
     create_tools.parse_cmds()
