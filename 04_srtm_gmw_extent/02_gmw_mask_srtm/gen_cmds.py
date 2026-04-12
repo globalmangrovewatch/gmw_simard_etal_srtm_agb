@@ -20,7 +20,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
             gmw_img = os.path.join(kwargs['gmw_path'], "{}_gmw_v4109_2000.tif".format(tile_base_name))
             out_img = os.path.join(kwargs['out_path'], "{}_srtm_gmw.tif".format(tile_base_name))
             cmp_file = os.path.join(kwargs['out_path'], "{}_cmp.txt".format(tile_base_name))
-            if not os.path.exists(cmp_file):
+            if (not os.path.exists(cmp_file)) and (not os.path.exists(out_img)):
                 c_dict = dict()
                 c_dict['srtm_tile'] = srtm_tile
                 c_dict['gmw_img'] = gmw_img
