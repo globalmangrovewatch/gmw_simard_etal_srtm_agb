@@ -63,6 +63,9 @@ for i, cntry_id in enumerate(ref_vals):
 out_vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
 out_vec_lyr="gmw_openstreetmap_country_boundaries_20250320_agb_alloc"
 
+vec_ds_obj, vec_lyr_obj = rsgislib.vectorutils.open_gdal_vec_lyr(vec_file, vec_lyr = None, readonly = True)
+
+rsgislib.vectorutils.write_vec_lyr_to_file(vec_lyr_obj, out_vec_file, out_vec_lyr, out_format = "GPKG", options = [], replace = False)
 
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "country_names", ogr.OFTString, cntry_names.tolist())
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", ogr.OFTString, agb_allom_rgns.tolist())
