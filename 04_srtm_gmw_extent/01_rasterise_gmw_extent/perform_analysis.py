@@ -15,6 +15,7 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
+        rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
 
         img_bbox = rsgislib.imageutils.get_img_bbox(self.params["srtm_tile"])
         img_buf_bbox = rsgislib.tools.geometrytools.buffer_bbox(img_bbox, 1)
@@ -23,16 +24,20 @@ class PerformAnalysis(PBPTQProcessTool):
         vec_ds_sub_obj, vec_lyr_sub_obj = rsgislib.vectorutils.subset_envs_vec_lyr_obj(vec_lyr_obj=vec_lyr_obj, bbox=img_buf_bbox)
         vec_ds_obj = None
 
-        rsgislib.imageutils.create_copy_img(self.params["srtm_tile"], self.params["out_img"], n_bands=1, pxl_val=0, gdalformat="KEA", datatype=rsgislib.TYPE_8UINT)
+        rsgislib.imageutils.create_copy_img(self.params["srtm_tile"], self.params["out_img"], n_bands=1, pxl_val=0, gdalformat="GTIFF", datatype=rsgislib.TYPE_8UINT)
 
         rsgislib.vectorutils.createrasters.rasterise_vec_lyr_obj(
             vec_lyr_obj=vec_lyr_sub_obj,
             output_img=self.params["out_img"],
             burn_val=1,
-            thematic=True,
+            thematic=False,
             no_data_val=0,
         )
         vec_ds_sub_obj = None
+
+        rsgislib.imageutils.pop_thmt_img_stats(
+                input_img=self.params["out_img"], add_clr_tab=True, calc_pyramids=True,
+                ignore_zero=True)
 
     def required_fields(self, **kwargs):
         return ["srtm_tile", "vec_file", "vec_lyr", "out_img"]

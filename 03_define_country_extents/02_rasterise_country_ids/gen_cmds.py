@@ -60,7 +60,7 @@ if __name__ == "__main__":
     script_cmd = f"python {py_script}"
 
     process_tools_mod = "perform_analysis"
-    process_tools_cls = "ProcessCmd"
+    process_tools_cls = "PerformAnalysis"
 
     create_tools = GenCmds(
             cmd=script_cmd,
