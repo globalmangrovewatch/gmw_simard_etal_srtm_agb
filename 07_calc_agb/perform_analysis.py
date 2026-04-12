@@ -67,6 +67,8 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
+        rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
+
         agb_lut = rsgislib.tools.utils.read_json_to_dict(self.params['agb_lut'])
 
         infiles = applier.FilenameAssociations()
@@ -74,13 +76,19 @@ class PerformAnalysis(PBPTQProcessTool):
         infiles.hba = self.params['hba_img']
         infiles.hmax = self.params['hmax_img']
         infiles.hchm = self.params['hchm_img']
+
         outfiles = applier.FilenameAssociations()
         outfiles.outimage = self.params['out_img']
+
         otherargs = applier.OtherInputs()
         otherargs.agb_lut = agb_lut
+
         aControls = applier.ApplierControls()
         aControls.progress = cuiprogress.CUIProgressBar()
-        aControls.drivername = 'KEA'
+        aControls.creationoptions = rsgislib.imageutils.get_rios_img_creation_opts(
+                'GTIFF'
+        )
+        aControls.drivername = 'GTIFF'
         aControls.omitPyramids = False
         aControls.calcStats = False
 
