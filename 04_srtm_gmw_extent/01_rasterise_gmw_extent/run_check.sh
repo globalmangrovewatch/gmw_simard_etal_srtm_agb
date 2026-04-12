@@ -1,1 +1,1 @@
-rsgischkgdalfile.py -i "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_core_srtm_rasters/*.kea" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
+rsgischkgdalfile.py -i "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4109_2000_srtm_rasters/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
