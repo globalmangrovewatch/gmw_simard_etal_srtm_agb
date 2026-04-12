@@ -31,10 +31,13 @@ class PerformAnalysis(PBPTQProcessTool):
             output_img=self.params["out_img"],
             burn_val=1,
             att_column=self.params["vec_col"],
-            thematic=True,
+            thematic=False,
             no_data_val=0,
         )
         vec_ds_sub_obj = None
+
+        rsgislib.imageutils.pop_thmt_img_stats(
+            input_img = self.params["out_img"], add_clr_tab = True, calc_pyramids = True, ignore_zero = True)
 
     def required_fields(self, **kwargs):
         return ["srtm_tile", "vec_file", "vec_lyr", "vec_col", "out_img"]
