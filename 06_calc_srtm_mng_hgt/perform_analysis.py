@@ -13,16 +13,18 @@ class PerformAnalysis(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
+        rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
+
         band_defns = list()
         band_defns.append(rsgislib.imagecalc.BandDefn('srtm', self.params["srtm_tile"], 1))
 
-        rsgislib.imagecalc.band_math(self.params["out_hba_img"], 'srtm<0.5?0:1.0754*srtm', 'KEA', rsgislib.TYPE_32FLOAT, band_defns)
+        rsgislib.imagecalc.band_math(self.params["out_hba_img"], 'srtm<0.5?0:1.0754*srtm', 'GTIFF', rsgislib.TYPE_32FLOAT, band_defns)
         rsgislib.imageutils.pop_img_stats(self.params['out_hba_img'], use_no_data=True, no_data_val=0, calc_pyramids=True)
 
-        rsgislib.imagecalc.band_math(self.params["out_hchm_img"], 'srtm<0.5?0:2.7191*srtm^0.676', 'KEA', rsgislib.TYPE_32FLOAT, band_defns)
+        rsgislib.imagecalc.band_math(self.params["out_hchm_img"], 'srtm<0.5?0:2.7191*srtm^0.676', 'GTIFF', rsgislib.TYPE_32FLOAT, band_defns)
         rsgislib.imageutils.pop_img_stats(self.params['out_hchm_img'], use_no_data=True, no_data_val=0, calc_pyramids=True)
 
-        rsgislib.imagecalc.band_math(self.params["out_hmax_img"], 'srtm<0.5?0:1.697*srtm', 'KEA', rsgislib.TYPE_32FLOAT, band_defns)
+        rsgislib.imagecalc.band_math(self.params["out_hmax_img"], 'srtm<0.5?0:1.697*srtm', 'GTIFF', rsgislib.TYPE_32FLOAT, band_defns)
         rsgislib.imageutils.pop_img_stats(self.params['out_hmax_img'], use_no_data=True, no_data_val=0, calc_pyramids=True)
 
     def required_fields(self, **kwargs):
