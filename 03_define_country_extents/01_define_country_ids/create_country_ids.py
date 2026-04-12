@@ -5,23 +5,23 @@ import numpy
 import osgeo.ogr as ogr
 import os
 
-out_vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326_UnqID.gpkg"
-out_vec_lyr="National"
+out_vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20260225_gma_regions.gpkg"
+out_vec_lyr="gmw_openstreetmap_country_boundaries_20260225_gma_regions"
 
 if os.path.exists(out_vec_file):
     rsgislib.vectorutils.delete_vector_file(out_vec_file)
 
 rsgislib.vectorattrs.add_unq_numeric_col(
-    vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326.gpkg",
-    vec_lyr="National",
-    unq_col="gid_0",
+    vec_file="/bigdata/petebunting/Dropbox/University/Research/Data/Mangroves/OpenStreetMap_Boundaries/20260225/gmw_openstreetmap_country_boundaries_20260225_gma_regions.gpkg",
+    vec_lyr="gmw_openstreetmap_country_boundaries_20260225_gma_regions",
+    unq_col="gmw_allocation",
     out_col="unqid",
     out_vec_file=out_vec_file,
     out_vec_lyr=out_vec_lyr,
     out_format="GPKG",
 )
 
-ref_vals = rsgislib.vectorattrs.read_vec_column(out_vec_file, out_vec_lyr, "gid_0")
+ref_vals = rsgislib.vectorattrs.read_vec_column(out_vec_file, out_vec_lyr, "gmw_allocation")
 unq_vals = rsgislib.vectorattrs.read_vec_column(out_vec_file, out_vec_lyr, "unqid")
 
 lut = dict()
@@ -67,4 +67,3 @@ rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom", og
 rsgislib.vectorattrs.write_vec_column(out_vec_file, out_vec_lyr, "agb_allom_idx", ogr.OFTInteger, agb_allom_rgns_idx.tolist())
 
 rsgislib.tools.utils.write_dict_to_json(agb_allom_id_lut, "allom_id_lut.json")
-
