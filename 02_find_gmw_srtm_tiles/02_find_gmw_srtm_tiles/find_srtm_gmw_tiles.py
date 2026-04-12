@@ -164,8 +164,8 @@ def query_file_lut(
 
 
 
-srtm_lut_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
-gmw_lut_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/gmw/gmw_union_tiles_lut.gpkg"
+srtm_lut_file = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
+gmw_lut_file = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4109_union_tiles_lut.gpkg"
 
 
 cp_cmds = query_file_lut(
@@ -173,7 +173,7 @@ cp_cmds = query_file_lut(
     lyr_name="srtm_tiles",
     roi_file=gmw_lut_file,
     roi_lyr="gmw_tiles",
-    out_dest="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/gmw_kea",
+    out_dest="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles",
     targz_out=False,
     cp_cmds=True,
 )
@@ -182,4 +182,3 @@ cp_cmds_set = set(cp_cmds)
 cp_cmds_lst = list(cp_cmds_set)
 
 rsgislib.tools.utils.write_list_to_file(cp_cmds_lst, "cp_gmw_srtm_tiles.sh")
-
