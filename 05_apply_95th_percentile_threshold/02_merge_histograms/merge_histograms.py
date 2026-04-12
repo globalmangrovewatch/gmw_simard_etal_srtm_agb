@@ -15,7 +15,7 @@ for country_idx in countries_idxs:
     countries_hists[country_idx] = numpy.zeros(70, dtype=int)
 
 
-tile_hist_files = glob.glob('/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/cnty_tile_hists/*.pkl')
+tile_hist_files = glob.glob('/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/cnty_tile_hists/*.pkl')
 
 for tile_hist in tile_hist_files:
     hist_pklobj = pickle.load(open(tile_hist, 'rb'))
@@ -26,10 +26,9 @@ for tile_hist in tile_hist_files:
         else:
             print("{} is not in countries_idxs.".format(country_idx))
 
-countries_hist_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country_srtm_histograms.pkl"
+countries_hist_file = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/country_srtm_histograms.pkl"
 
 with open(countries_hist_file, 'wb') as out_pkl_obj:
     pickle.dump(countries_hists, out_pkl_obj, protocol=pickle.HIGHEST_PROTOCOL)
 
 pprint.pprint(countries_hists)
-

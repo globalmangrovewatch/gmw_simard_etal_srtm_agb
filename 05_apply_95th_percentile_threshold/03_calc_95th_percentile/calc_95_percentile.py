@@ -5,7 +5,7 @@ import rsgislib.tools.utils
 import rsgislib.vectorattrs
 import osgeo.ogr as ogr
 
-histfile = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country_srtm_histograms.pkl"
+histfile = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/country_srtm_histograms.pkl"
 
 hist_pklobj = pickle.load(open(histfile, 'rb'))
 
@@ -31,13 +31,13 @@ for country_idx in hist_pklobj.keys():
     print("\t95th val = {}".format(vals_95th[country_idx]))
 
 
-out_json_file = "/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/srtm/country_srtm_95th_percentiles.json"
+out_json_file = "country_srtm_95th_percentiles.json"
 rsgislib.tools.utils.write_dict_to_json(vals_95th, out_json_file)
 
-vec_file="/scratch/a.pfb/gmw_simard_etal_srtm_agb/data/countries/GADM_EEZ_WCMC_4326_UnqID.gpkg"
-vec_lyr="National"
+vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
+vec_lyr="gmw_openstreetmap_country_boundaries_20250320_agb_alloc"
 
-ctry_uid = rsgislib.vectorattrs.read_vec_column(vec_file, vec_lyr, att_column="unqid")
+ctry_uid = rsgislib.vectorattrs.read_vec_column(vec_file, vec_lyr, att_column="gmw_cntry_id")
 percent95th_vals = numpy.zeros_like(ctry_uid, dtype=float)
 
 for i, uid in enumerate(ctry_uid):
@@ -47,7 +47,3 @@ for i, uid in enumerate(ctry_uid):
 
 
 rsgislib.vectorattrs.write_vec_column(vec_file, vec_lyr, "percent95th", ogr.OFTReal, percent95th_vals.tolist())
-
-
-
-
