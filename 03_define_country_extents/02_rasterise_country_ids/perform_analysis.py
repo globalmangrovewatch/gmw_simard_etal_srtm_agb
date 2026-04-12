@@ -24,7 +24,7 @@ class PerformAnalysis(PBPTQProcessTool):
         vec_ds_sub_obj, vec_lyr_sub_obj = rsgislib.vectorutils.subset_envs_vec_lyr_obj(vec_lyr_obj=vec_lyr_obj, bbox=img_buf_bbox)
         vec_ds_obj = None
 
-        rsgislib.imageutils.create_copy_img(self.params["srtm_tile"], self.params["out_img"], n_bands=1, pxl_val=0, gdalformat="KEA", datatype=rsgislib.TYPE_8UINT)
+        rsgislib.imageutils.create_copy_img(self.params["srtm_tile"], self.params["out_img"], n_bands=1, pxl_val=0, gdalformat="GTIFF", datatype=rsgislib.TYPE_8UINT)
 
         rsgislib.vectorutils.createrasters.rasterise_vec_lyr_obj(
             vec_lyr_obj=vec_lyr_sub_obj,
