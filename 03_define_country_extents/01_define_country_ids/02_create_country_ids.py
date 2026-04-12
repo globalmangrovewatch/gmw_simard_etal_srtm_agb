@@ -32,10 +32,10 @@ country_names_lut = dict()
 country_names_lut['ctry'] = dict()
 country_names_lut['gid'] = dict()
 for ref_val, unq_val in zip(ref_vals, cntry_vals):
-    lut['gid'][ref_val] = cntry_vals
-    lut['ctry'][cntry_vals] = ref_val
+    country_names_lut['gid'][ref_val] = cntry_vals
+    country_names_lut['ctry'][cntry_vals] = ref_val
 
-rsgislib.tools.utils.write_dict_to_json(lut, "country_names_lut.json")
+rsgislib.tools.utils.write_dict_to_json(country_names_lut, "country_names_lut.json")
 
 
 agb_allom_lut = rsgislib.tools.utils.read_json_to_dict("countries_abg_lut.json")
