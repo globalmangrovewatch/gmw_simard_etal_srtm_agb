@@ -41,18 +41,18 @@ class GenCmds(PBPTGenQProcessToolCmds):
                 db_info_file="pbpt_lcl_db_info.json",
         )
 
-    if __name__ == "__main__":
-        py_script = os.path.abspath("perform_analysis.py")
-        script_cmd = f"python {py_script}"
+if __name__ == "__main__":
+    py_script = os.path.abspath("perform_analysis.py")
+    script_cmd = f"python {py_script}"
 
-        process_tools_mod = "perform_analysis"
-        process_tools_cls = "PerformAnalysis"
+    process_tools_mod = "perform_analysis"
+    process_tools_cls = "PerformAnalysis"
 
-        create_tools = GenCmds(
-                cmd=script_cmd,
-                db_conn_file="/home/pete/.pbpt_db_conn.txt",
-                lock_file_path="./pbpt_lock_file.txt",
-                process_tools_mod=process_tools_mod,
-                process_tools_cls=process_tools_cls,
-        )
-        create_tools.parse_cmds()
+    create_tools = GenCmds(
+            cmd=script_cmd,
+            db_conn_file="/home/pete/.pbpt_db_conn.txt",
+            lock_file_path="./pbpt_lock_file.txt",
+            process_tools_mod=process_tools_mod,
+            process_tools_cls=process_tools_cls,
+    )
+    create_tools.parse_cmds()
