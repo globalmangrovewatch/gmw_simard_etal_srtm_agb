@@ -31,9 +31,9 @@ agb_allom_rgns[...] = 'Global Hmax power'
 country_names_lut = dict()
 country_names_lut['ctry'] = dict()
 country_names_lut['gid'] = dict()
-for ref_val, unq_val in zip(ref_vals, cntry_vals):
-    country_names_lut['gid'][ref_val] = cntry_vals
-    country_names_lut['ctry'][cntry_vals] = ref_val
+for ref_val, cntry_val in zip(ref_vals, cntry_vals):
+    country_names_lut['gid'][ref_val] = cntry_val
+    country_names_lut['ctry'][cntry_val] = ref_val
 
 rsgislib.tools.utils.write_dict_to_json(country_names_lut, "country_names_lut.json")
 
