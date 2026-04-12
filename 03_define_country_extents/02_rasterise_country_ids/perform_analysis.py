@@ -16,7 +16,7 @@ class PerformAnalysis(PBPTQProcessTool):
 
     def do_processing(self, **kwargs):
         rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
-        
+
         img_bbox = rsgislib.imageutils.get_img_bbox(self.params["srtm_tile"])
         img_buf_bbox = rsgislib.tools.geometrytools.buffer_bbox(img_bbox, 1)
 
