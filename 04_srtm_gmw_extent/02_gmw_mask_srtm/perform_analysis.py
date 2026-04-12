@@ -19,7 +19,10 @@ class PerformAnalysis(PBPTQProcessTool):
         gmw_count = rsgislib.imagecalc.count_pxls_of_val(input_img=self.params["gmw_img"], vals=[1])[0]
         print(f"gmw_count: {gmw_count}")
         if gmw_count > 0:
-            rsgislib.imageutils.mask_img(self.params["srtm_tile"], self.params["gmw_img"], self.params["out_img"], gdalformat="GTIFF", datatype=rsgislib.TYPE_16INT, out_value=-32768, mask_value=0)
+            band_defns = list()
+            band_defns.append(rsgislib.imagecalc.BandDefn(band_name='gmw', input_img=self.params["gmw_img"], img_band=1))
+            band_defns.append(rsgislib.imagecalc.BandDefn(band_name='srtm', input_img=self.params["srtm_tile"], img_band=1))
+            rsgislib.imagecalc.band_math(output_img=self.params['out_img'], exp='(gmw == 1) && (srtm > 0) && (srtm < 80)?srtm:-32768', gdalformat='GTIFF', datatype=rsgislib.TYPE_16INT, band_defs=band_defns)
             rsgislib.imageutils.pop_img_stats(self.params['out_img'], use_no_data=True, no_data_val=-32768, calc_pyramids=True)
 
         pathlib.Path(self.params['cmp_file']).touch()
