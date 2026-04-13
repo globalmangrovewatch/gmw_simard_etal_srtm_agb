@@ -49,7 +49,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
         self.create_shell_exe(
             run_script="run_exe_analysis.sh",  # The file to call to run analysis
             cmds_sh_file="pbpt_cmds_lst.sh",  # The list of commands to be run.
-            n_cores=10,  # The number of cores to use for analysis.
+            n_cores=30,  # The number of cores to use for analysis.
             db_info_file="pbpt_lcl_db_info.json",
         )
 

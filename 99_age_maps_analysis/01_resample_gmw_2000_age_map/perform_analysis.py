@@ -13,6 +13,8 @@ class ProcessCmd(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
+        rsgislib.imageutils.set_env_vars_lzw_gtiff_outs()
+
         rsgislib.imageutils.resample_img_to_match(
             in_ref_img=self.params["ref_img"],
             in_process_img=self.params["mosaic_img"],
