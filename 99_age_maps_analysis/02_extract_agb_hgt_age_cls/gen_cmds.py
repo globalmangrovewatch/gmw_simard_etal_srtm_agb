@@ -23,7 +23,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
             basename = rsgislib.tools.filetools.get_file_basename(agb_img).replace("_srtm_gmw_agb", "")
 
             gmw_msk_img = os.path.join(kwargs["gmw_ext_imgs"], f"{basename}_gmw_v4109_2000.tif")
-            hgt_img = os.path.join(kwargs['hgt_imgs'], f"{basename}_hmax.tif")
+            hgt_img = os.path.join(kwargs['hgt_imgs'], f"{basename}_srtm_gmw_hmax.tif")
             age_img = os.path.join(kwargs['age_imgs'], f"{basename}_srtm_gmw_v4019_2000_age_map.tif")
 
             # Create the output file name
