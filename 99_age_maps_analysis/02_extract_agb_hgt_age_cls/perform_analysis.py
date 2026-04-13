@@ -42,7 +42,6 @@ class ProcessCmd(PBPTQProcessTool):
                 out_h5_file=self.params["out_h5_file"],
                 mask_val=1,
                 datatype=rsgislib.TYPE_32FLOAT,
-                msk_img_band=1,
         )
 
     def required_fields(self, **kwargs):
