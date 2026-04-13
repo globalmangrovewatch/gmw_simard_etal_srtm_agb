@@ -10,8 +10,6 @@ logger = logging.getLogger(__name__)
 
 class GenCmds(PBPTGenQProcessToolCmds):
     def gen_command_info(self, **kwargs):
-        print("** This function needs implementing! **")
-
         # Create output directory if it doesn't exist.
         if not os.path.exists(kwargs["out_dir"]):
             os.mkdir(kwargs["out_dir"])
@@ -22,27 +20,28 @@ class GenCmds(PBPTGenQProcessToolCmds):
         # Loop through the reference images to create the jobs
         for ref_img in ref_imgs:
             # Get the basename of the input file to make the output file name
-            basename = rsgislib.tools.filetools.get_file_basename(ref_img)
+            basename = rsgislib.tools.filetools.get_file_basename(ref_img).replace("_srtm_gmw_agb", "")
 
             # Create the output file name
-            output_file = os.path.join(kwargs["out_dir"], f"{basename}.tif")
+            out_img = os.path.join(kwargs["out_dir"], f"{basename}_srtm_gmw_v4019_2000_age_map.tif")
             # Check if the output file exists.
-            if not os.path.exists(output_file):
+            if not os.path.exists(out_img):
                 # You will probably have a loop here:
                 # Within the loop create a dict with the parameters for each
                 # job which will be added to the self.params list.
                 c_dict = dict()
-                c_dict["input1"] = ""
-                c_dict["input2"] = ""
-                c_dict["input3"] = ""
-                c_dict["output1"] = ""
+                c_dict["ref_img"] = ref_img
+                c_dict["mosaic_img"] = kwargs["mosaic_img"]
+                c_dict["out_img"] = out_img
                 self.params.append(c_dict)
 
     def run_gen_commands(self):
         # Could Pass info to gen_command_info function
         # (e.g., input / output directories)
         self.gen_command_info(
-            ref_imgs="path/to/inputs/*.kea", out_dir="/path/to/outputs"
+            ref_imgs="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_agb/*.tif",
+            mosaic_img = os.path.abspath("gmw_v4109_age_map.vrt"),
+            out_dir="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/age_maps/gmw_v4109_2000_age",
         )
 
         self.pop_params_db()
@@ -70,4 +69,3 @@ if __name__ == "__main__":
         process_tools_cls=process_tools_cls,
     )
     create_tools.parse_cmds()
-
