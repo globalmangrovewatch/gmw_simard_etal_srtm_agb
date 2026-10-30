@@ -40,9 +40,20 @@ class ProcessCmd(PBPTQProcessTool):
         # Create 2D coordinate grids
         x_grid, y_grid = numpy.meshgrid(x_coords, y_coords)
 
+        agb_flat = agb_arr.flatten()
+        x_flat = x_grid.flatten()
+        y_flat = y_grid.flatten()
+
         # Resulting shapes
-        print(x_grid)
-        print(y_grid)
+        print(x_flat)
+        print(y_flat)
+
+        x_flat_sub = x_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
+        y_flat_sub = y_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
+        agb_flat_sub = agb_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
+
+        print(agb_flat_sub.shape)
+
 
     def required_fields(self, **kwargs):
         # Return a list of the required fields which will be checked
