@@ -14,10 +14,12 @@ class GenCmds(PBPTGenQProcessToolCmds):
         if not os.path.exists(kwargs['out_path']):
             os.mkdir(kwargs['out_path'])
 
+        year = kwargs['year']
+
         srtm_tiles = glob.glob(kwargs['srtm_tiles'])
         for srtm_tile in srtm_tiles:
             tile_base_name = rsgislib.tools.filetools.get_file_basename(srtm_tile)
-            out_img = os.path.join(kwargs['out_path'], "{}_gmw_v4112_2000.tif".format(tile_base_name))
+            out_img = os.path.join(kwargs['out_path'], f"{tile_base_name}_gmw_v4112_{year}.tif")
             if not os.path.exists(out_img):
                 c_dict = dict()
                 c_dict['srtm_tile'] = srtm_tile
@@ -29,9 +31,17 @@ class GenCmds(PBPTGenQProcessToolCmds):
     def run_gen_commands(self):
 
         self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles/*.tif',
+                              year="2000",
                               gmw_vec_file="/bigdata/GlobalMangroveWatch/gmw_ext_lyrs/gmw_v4112_timeseries/mng_ext_vectors/cntry_info/gmw_v4112_2000_mng_ext_cntry_info_vec.gpkg",
                               gmw_vec_lyr="gmw_v4112_2000_mng_ext_cntry_info_vec",
                               out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_srtm_rasters')
+
+        self.gen_command_info(
+            srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles/*.tif',
+            year="2025",
+            gmw_vec_file="/bigdata/GlobalMangroveWatch/gmw_ext_lyrs/gmw_v4112_timeseries/mng_ext_vectors/cntry_info/gmw_v4112_2025_mng_ext_cntry_info_vec.gpkg",
+            gmw_vec_lyr="gmw_v4112_2025_mng_ext_cntry_info_vec",
+            out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2025_srtm_rasters')
 
         self.pop_params_db()
 
