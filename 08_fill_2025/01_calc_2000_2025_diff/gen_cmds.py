@@ -23,15 +23,15 @@ class GenCmds(PBPTGenQProcessToolCmds):
             tile_base_name = rsgislib.tools.filetools.get_file_basename(srtm_tile)
 
             gmw_2000_img = os.path.join(
-                kwargs["out_path"], f"{tile_base_name}_gmw_v4112_2000.tif"
+                kwargs["gmw_2000_dir"], f"{tile_base_name}_gmw_v4112_2000.tif"
             )
             gmw_2025_img = os.path.join(
-                kwargs["out_path"], f"{tile_base_name}_gmw_v4112_2025.tif"
+                kwargs["gmw_2025_dir"], f"{tile_base_name}_gmw_v4112_2025.tif"
             )
 
             # Create the output file name
             out_img = os.path.join(
-                kwargs["out_path"], f"{tile_base_name}_gmw_v4112_2000_2025_diff.tif"
+                kwargs["out_dir"], f"{tile_base_name}_gmw_v4112_2000_2025_diff.tif"
             )
             if not os.path.exists(out_img):
                 c_dict = dict()
@@ -45,8 +45,8 @@ class GenCmds(PBPTGenQProcessToolCmds):
         # (e.g., input / output directories)
         self.gen_command_info(
             srtm_tiles="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles/*.tif",
-            gmw_2000_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_srtm_rasters",
-            gmw_2025_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2025_srtm_rasters",
+            gmw_2000_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_srtm_rasters",
+            gmw_2025_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2025_srtm_rasters",
             out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_2025_diff_srtm_rasters",
         )
 
