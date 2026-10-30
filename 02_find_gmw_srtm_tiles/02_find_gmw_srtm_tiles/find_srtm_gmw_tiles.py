@@ -165,7 +165,7 @@ def query_file_lut(
 
 
 srtm_lut_file = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
-gmw_lut_file = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4109_union_tiles_lut.gpkg"
+gmw_lut_file = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4112_union_tiles_lut.gpkg"
 
 
 cp_cmds = query_file_lut(
