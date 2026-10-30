@@ -29,11 +29,11 @@ class GenCmds(PBPTGenQProcessToolCmds):
 
     def run_gen_commands(self):
 
-        self.gen_command_info(srtm_tiles='/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_v4109_2000_srtm_tiles/*.tif',
-                              countries_vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg",
+        self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_v4109_2000_srtm_tiles/*.tif',
+                              countries_vec_file="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg",
                               countries_vec_lyr="gmw_openstreetmap_country_boundaries_20250320_agb_alloc",
                               percent_95th_col="percent95th",
-                              out_path='/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_95th_percent_thres')
+                              out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_95th_percent_thres')
 
         self.pop_params_db()
 

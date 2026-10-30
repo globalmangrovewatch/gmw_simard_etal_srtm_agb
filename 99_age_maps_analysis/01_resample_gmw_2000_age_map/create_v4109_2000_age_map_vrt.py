@@ -3,7 +3,7 @@ import rsgislib.tools.filetools
 import glob
 import os
 
-tmp_dir = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/tmp/age_maps"
+tmp_dir = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/tmp/age_maps"
 if not os.path.exists(tmp_dir):
     os.mkdir(tmp_dir)
 

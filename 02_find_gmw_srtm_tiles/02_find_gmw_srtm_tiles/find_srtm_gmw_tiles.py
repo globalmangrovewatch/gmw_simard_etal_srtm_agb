@@ -164,8 +164,8 @@ def query_file_lut(
 
 
 
-srtm_lut_file = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
-gmw_lut_file = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4109_union_tiles_lut.gpkg"
+srtm_lut_file = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_tiles_lut.gpkg"
+gmw_lut_file = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4109_union_tiles_lut.gpkg"
 
 
 cp_cmds = query_file_lut(
@@ -173,7 +173,7 @@ cp_cmds = query_file_lut(
     lyr_name="srtm_tiles",
     roi_file=gmw_lut_file,
     roi_lyr="gmw_tiles",
-    out_dest="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles",
+    out_dest="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles",
     targz_out=False,
     cp_cmds=True,
 )

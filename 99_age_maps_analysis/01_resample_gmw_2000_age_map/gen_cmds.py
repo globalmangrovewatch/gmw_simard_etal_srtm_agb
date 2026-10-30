@@ -39,9 +39,9 @@ class GenCmds(PBPTGenQProcessToolCmds):
         # Could Pass info to gen_command_info function
         # (e.g., input / output directories)
         self.gen_command_info(
-            ref_imgs="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_agb/*.tif",
+            ref_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_agb/*.tif",
             mosaic_img = os.path.abspath("gmw_v4109_age_map.vrt"),
-            out_dir="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/age_maps/gmw_v4109_2000_age",
+            out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/age_maps/gmw_v4109_2000_age",
         )
 
         self.pop_params_db()

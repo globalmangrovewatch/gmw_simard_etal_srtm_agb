@@ -5,7 +5,7 @@ import rsgislib.tools.utils
 import rsgislib.vectorattrs
 import osgeo.ogr as ogr
 
-histfile = "/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/country_srtm_histograms.pkl"
+histfile = "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/country_srtm_histograms.pkl"
 
 hist_pklobj = pickle.load(open(histfile, 'rb'))
 
@@ -34,7 +34,7 @@ for country_idx in hist_pklobj.keys():
 out_json_file = "country_srtm_95th_percentiles.json"
 rsgislib.tools.utils.write_dict_to_json(vals_95th, out_json_file)
 
-vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
+vec_file="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
 vec_lyr="gmw_openstreetmap_country_boundaries_20250320_agb_alloc"
 
 ctry_uid = rsgislib.vectorattrs.read_vec_column(vec_file, vec_lyr, att_column="gmw_cntry_id")

@@ -60,7 +60,7 @@ for i, cntry_id in enumerate(ref_vals):
             agb_allom_rgns_idx[i] = agb_allom_id_lut["allom"][agb_allom]
 
 
-out_vec_file="/bigdata/petebunting/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
+out_vec_file="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_openstreetmap_country_boundaries_20250320_agb_alloc.gpkg"
 out_vec_lyr="gmw_openstreetmap_country_boundaries_20250320_agb_alloc"
 
 vec_ds_obj, vec_lyr_obj = rsgislib.vectorutils.open_gdal_vec_lyr(vec_file, vec_lyr = None, readonly = True)
