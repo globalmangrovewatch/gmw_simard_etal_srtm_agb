@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     create_tools = GenCmds(
             cmd=script_cmd,
-            db_conn_file="/home/pete/.pbpt_db_conn.txt",
+            db_conn_file="/home/pfb/.pbpt_db_conn.txt",
             lock_file_path="./pbpt_lock_file.txt",
             process_tools_mod=process_tools_mod,
             process_tools_cls=process_tools_cls,
