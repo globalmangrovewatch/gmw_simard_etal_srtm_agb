@@ -28,7 +28,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
 
     def run_gen_commands(self):
 
-        self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_v4109_2000_srtm_tiles/*.tif',
+        self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_v4112_2000_srtm_tiles/*.tif',
                               cnty_path="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/countries/srtm_rasters",
                               out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/cnty_tile_hists')
 

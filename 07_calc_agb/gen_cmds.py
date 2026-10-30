@@ -41,11 +41,11 @@ class GenCmds(PBPTGenQProcessToolCmds):
 
         self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/srtm_95th_percent_thresholded/*.tif',
                               agb_lut_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/countries/agb_allom_rasters',
-                              hba_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hba',
-                              hchm_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hchm',
-                              hmax_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hmax',
+                              hba_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hba',
+                              hchm_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hchm',
+                              hmax_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hmax',
                               agb_lut='../03_define_country_extents/01_define_country_ids/allom_id_lut.json',
-                              out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_agb')
+                              out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_agb')
 
         self.pop_params_db()
 

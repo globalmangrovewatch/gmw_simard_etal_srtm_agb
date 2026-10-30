@@ -22,12 +22,12 @@ class GenCmds(PBPTGenQProcessToolCmds):
             # Get the basename of the input file to make the output file name
             basename = rsgislib.tools.filetools.get_file_basename(agb_img).replace("_srtm_gmw_agb", "")
 
-            gmw_msk_img = os.path.join(kwargs["gmw_ext_imgs"], f"{basename}_gmw_v4109_2000.tif")
+            gmw_msk_img = os.path.join(kwargs["gmw_ext_imgs"], f"{basename}_gmw_v4112_2000.tif")
             hgt_img = os.path.join(kwargs['hgt_imgs'], f"{basename}_srtm_gmw_hmax.tif")
             age_img = os.path.join(kwargs['age_imgs'], f"{basename}_srtm_gmw_v4019_2000_age_map.tif")
 
             # Create the output file name
-            out_h5_file = os.path.join(kwargs["out_dir"], f"{basename}_gmw_v4109_agb_hgt_age.h5")
+            out_h5_file = os.path.join(kwargs["out_dir"], f"{basename}_gmw_v4112_agb_hgt_age.h5")
             # Check if the output file exists.
             if not os.path.exists(out_h5_file):
                 # You will probably have a loop here:
@@ -45,11 +45,11 @@ class GenCmds(PBPTGenQProcessToolCmds):
         # Could Pass info to gen_command_info function
         # (e.g., input / output directories)
         self.gen_command_info(
-            agb_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_agb/*.tif",
-            gmw_ext_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4109_2000_srtm_rasters',
-            age_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/age_maps/gmw_v4109_2000_age",
-            hgt_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hmax',
-            out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4109_2000_extracted"
+            agb_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_agb/*.tif",
+            gmw_ext_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_srtm_rasters',
+            age_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/age_maps/gmw_v4112_2000_age",
+            hgt_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hmax',
+            out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_extracted"
         )
 
         self.pop_params_db()

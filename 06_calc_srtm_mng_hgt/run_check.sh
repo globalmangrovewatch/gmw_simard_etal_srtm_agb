@@ -1,3 +1,3 @@
-rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hba/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
-rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hchm/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
-rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4109_2000_hmax/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
+rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hba/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
+rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hchm/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
+rsgischkgdalfile.py -i "/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hmax/*.tif" --nbands 1 --epsg 4326 --chkproj --readimg --chksum --rmerr
