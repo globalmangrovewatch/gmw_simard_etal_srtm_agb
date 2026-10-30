@@ -28,8 +28,8 @@ class ProcessCmd(PBPTQProcessTool):
         agb_arr_shp = agb_arr.shape
         print(agb_arr_shp)
 
-        ncols = agb_arr_shp[0]
-        nrows = agb_arr_shp[1]
+        ncols = agb_arr_shp[1]
+        nrows = agb_arr_shp[2]
 
         print(f"ncols = {ncols}")
         print(f"nrows = {nrows}")
