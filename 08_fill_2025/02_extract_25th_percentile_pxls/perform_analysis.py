@@ -40,9 +40,9 @@ class ProcessCmd(PBPTQProcessTool):
         # Create 2D coordinate grids
         x_grid, y_grid = numpy.meshgrid(x_coords, y_coords)
 
-        # Resulting shapes: (1500, 1000)
-        print(x_grid.shape)  # (1500, 1000)
-        print(y_grid.shape)  # (1500, 1000)
+        # Resulting shapes
+        print(x_grid)
+        print(y_grid)
 
     def required_fields(self, **kwargs):
         # Return a list of the required fields which will be checked
