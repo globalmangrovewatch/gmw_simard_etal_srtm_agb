@@ -17,7 +17,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
         srtm_tiles = glob.glob(kwargs['srtm_tiles'])
         for srtm_tile in srtm_tiles:
             tile_base_name = rsgislib.tools.filetools.get_file_basename(srtm_tile)
-            out_img = os.path.join(kwargs['out_path'], "{}_gmw_v4109_2000.tif".format(tile_base_name))
+            out_img = os.path.join(kwargs['out_path'], "{}_gmw_v4112_2000.tif".format(tile_base_name))
             if not os.path.exists(out_img):
                 c_dict = dict()
                 c_dict['srtm_tile'] = srtm_tile
@@ -29,16 +29,16 @@ class GenCmds(PBPTGenQProcessToolCmds):
     def run_gen_commands(self):
 
         self.gen_command_info(srtm_tiles='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/srtm/gmw_srtm_tiles/*.tif',
-                              gmw_vec_file="/bigdata/petebunting/Dropbox/University/Research/Projects/GlobalMangroveWatch/GMW_v4_Development/gmw_v4_full_timeseries/v4109/gmw_4109_2000_mng_ext_vec.gpkg",
-                              gmw_vec_lyr="gmw_4109_2000_mng_ext_vec",
-                              out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4109_2000_srtm_rasters')
+                              gmw_vec_file="/bigdata/GlobalMangroveWatch/gmw_ext_lyrs/gmw_v4112_timeseries/mng_ext_vectors/cntry_info/gmw_v4112_2000_mng_ext_cntry_info_vec.gpkg",
+                              gmw_vec_lyr="gmw_v4112_2000_mng_ext_cntry_info_vec",
+                              out_path='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_srtm_rasters')
 
         self.pop_params_db()
 
         self.create_shell_exe(
                 run_script="run_exe_analysis.sh",  # The file to call to run analysis
                 cmds_sh_file="pbpt_cmds_lst.sh",  # The list of commands to be run.
-                n_cores=40,  # The number of cores to use for analysis.
+                n_cores=60,  # The number of cores to use for analysis.
                 db_info_file="pbpt_lcl_db_info.json",
         )
 
