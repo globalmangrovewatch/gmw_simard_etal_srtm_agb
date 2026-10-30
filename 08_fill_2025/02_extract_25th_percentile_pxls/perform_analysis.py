@@ -6,6 +6,7 @@ import rsgislib.imagecalc
 import rsgislib.imageutils
 
 import numpy
+import pandas
 
 from pbprocesstools.pbpt_q_process import PBPTQProcessTool
 
@@ -26,13 +27,13 @@ class ProcessCmd(PBPTQProcessTool):
         x_res, y_res = rsgislib.imageutils.get_img_res(self.params["agb_img"], abs_vals = True)
         agb_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["agb_img"], img_bands = [1])
         agb_arr_shp = agb_arr.shape
-        print(agb_arr_shp)
+        #print(agb_arr_shp)
 
         ncols = agb_arr_shp[1]
         nrows = agb_arr_shp[2]
 
-        print(f"ncols = {ncols}")
-        print(f"nrows = {nrows}")
+        #print(f"ncols = {ncols}")
+        #print(f"nrows = {nrows}")
 
         x_coords = tlX + numpy.arange(ncols) * x_res
         y_coords = tlY - numpy.arange(nrows) * y_res
@@ -45,14 +46,21 @@ class ProcessCmd(PBPTQProcessTool):
         y_flat = y_grid.flatten()
 
         # Resulting shapes
-        print(x_flat)
-        print(y_flat)
+        #print(x_flat)
+        #print(y_flat)
 
         x_flat_sub = x_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
         y_flat_sub = y_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
         agb_flat_sub = agb_flat[numpy.logical_and(agb_flat > 0, agb_flat < percent25th)]
 
-        print(agb_flat_sub.shape)
+        #print(agb_flat_sub.shape)
+        df = pandas.DataFrame({
+            'x'  : x_flat_sub,
+            'y'  : y_flat_sub,
+            'agb': agb_flat_sub
+        })
+        df = df.dropna(subset=['agb']).reset_index(drop=True)
+        df.to_parquet(self.params["out_pd_file"], compression="gzip", index=False)
 
 
     def required_fields(self, **kwargs):
