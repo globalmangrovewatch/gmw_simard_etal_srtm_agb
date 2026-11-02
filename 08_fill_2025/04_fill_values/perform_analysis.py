@@ -37,10 +37,11 @@ class ProcessCmd(PBPTQProcessTool):
         gmw_diff_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_diff_img"], img_bands=[1])
 
         gmw_diff_flat = gmw_diff_arr.flatten()
+        gmw_2025_flat = gmw_2025_arr.flatten()
         agb_flat = agb_arr.flatten()
         pxl_id = numpy.arange(gmw_diff_flat.shape[0])
 
-        pxl_id_sub = pxl_id[gmw_diff_flat == 1]
+        pxl_id_sub = pxl_id[numpy.logical_or(gmw_diff_flat == 1, numpy.logical_and(gmw_2025_flat == 1, agb_flat < 1))]
 
         agb_samples = numpy.random.normal(loc=p_mean, scale=p_std, size=len(pxl_id_sub))
         agb_samples = numpy.clip(agb_samples, 0.1, p_max)
