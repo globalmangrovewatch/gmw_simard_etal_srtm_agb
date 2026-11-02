@@ -23,7 +23,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
         for tilename in tiles_lut:
             gmw_2025_img = os.path.join(kwargs["gmw_2025_dir"], f"{tilename}_gmw_v4112_2025.tif")
             gmw_diff_img = os.path.join(kwargs["gmw_diff_img_dir"], f"{tilename}_gmw_v4112_2000_2025_diff.tif")
-            gmw_agb_img = os.path.join(kwargs["gmw_diff_img_dir"], f"{tilename}{agb_type_name}.tif")
+            gmw_agb_img = os.path.join(kwargs["gmw_agb_img_dir"], f"{tilename}{agb_type_name}.tif")
 
             pxl_smpl_files = list()
             pxl_smpl_files.append(os.path.join(kwargs["gmw_pxl_smpls_dir"], f"{tilename}{agb_type_name}_pxl_vals.parquet.gz"))
