@@ -21,16 +21,21 @@ class ProcessCmd(PBPTQProcessTool):
                 data_df = pandas.read_parquet(data_file)
                 if len(data_df) > 0:
                     data_dfs.append(data_df)
-        data_df = pandas.concat(data_dfs, ignore_index=True)
-        agb_vals = data_df['agb'].values
-        agb_vals = agb_vals[numpy.isfinite(agb_vals)]
+        if len(data_dfs) > 0:
+            data_df = pandas.concat(data_dfs, ignore_index=True)
+            agb_vals = data_df['agb'].values
+            agb_vals = agb_vals[numpy.isfinite(agb_vals)]
 
-        # Fit a distribution (e.g. lognormal or bounded kernel density estimate)
-        # If samples are clustered/constant, calculate summary stats:
-        #p_min = numpy.min(agb_vals)
-        p_max = numpy.max(agb_vals)
-        p_mean = numpy.mean(agb_vals)
-        p_std = numpy.std(agb_vals) if numpy.std(agb_vals) > 0 else (p_mean * 0.15)
+            # Fit a distribution (e.g. lognormal or bounded kernel density estimate)
+            # If samples are clustered/constant, calculate summary stats:
+            #p_min = numpy.min(agb_vals)
+            p_max = numpy.max(agb_vals)
+            p_mean = numpy.mean(agb_vals)
+            p_std = numpy.std(agb_vals) if numpy.std(agb_vals) > 0 else (p_mean * 0.15)
+        else:
+            p_max = 50
+            p_mean = 20
+            p_std = p_mean * 0.15
 
         gmw_2025_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_2025_img"], img_bands=[1])
         gmw_diff_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_diff_img"], img_bands=[1])
