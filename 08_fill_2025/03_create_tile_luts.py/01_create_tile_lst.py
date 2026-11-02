@@ -1,7 +1,7 @@
 import os
 import glob
 import rsgislib
-import rsgislib
+import rsgislib.imagecalc
 
 
 def create_gmw_tile_lst(imgs_dir):
@@ -9,6 +9,8 @@ def create_gmw_tile_lst(imgs_dir):
     for img in imgs:
         unq_vals = rsgislib.imagecalc.get_unique_values(input_img = img, img_band = 1)
         print(unq_vals)
+        if len(unq_vals) > 1:
+            print(img)
         
 
 
