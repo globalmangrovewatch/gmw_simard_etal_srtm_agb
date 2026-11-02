@@ -32,9 +32,13 @@ class ProcessCmd(PBPTQProcessTool):
         p_mean = numpy.mean(agb_vals)
         p_std = numpy.std(agb_vals) if numpy.std(agb_vals) > 0 else (p_mean * 0.15)
 
-        agb_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_agb_img"],  img_bands=[1])
         gmw_2025_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_2025_img"], img_bands=[1])
         gmw_diff_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_diff_img"], img_bands=[1])
+        if os.path.exists(self.params["gmw_agb_img"]):
+            agb_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_agb_img"],  img_bands=[1])
+        else:
+            agb_arr = numpy.zeros_like(gmw_2025_arr)
+
 
         gmw_diff_flat = gmw_diff_arr.flatten()
         gmw_2025_flat = gmw_2025_arr.flatten()
