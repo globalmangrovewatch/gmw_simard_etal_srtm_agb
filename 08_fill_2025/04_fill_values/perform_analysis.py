@@ -46,7 +46,7 @@ class ProcessCmd(PBPTQProcessTool):
         agb_samples = numpy.clip(agb_samples, 0.1, p_max)
         agb_flat[pxl_id_sub] = agb_samples
 
-        out_agb_arr = agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2]))
+        out_agb_arr = numpy.expand_dims(agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2])), axis=0)
         out_agb_arr[gmw_2025_arr == 0] = 0
 
         rsgislib.imageutils.create_img_from_array_ref_img(
