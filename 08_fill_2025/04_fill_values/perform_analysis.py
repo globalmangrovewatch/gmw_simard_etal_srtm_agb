@@ -38,7 +38,7 @@ class ProcessCmd(PBPTQProcessTool):
 
         gmw_diff_flat = gmw_diff_arr.flatten()
         agb_flat = agb_arr.flatten()
-        pxl_id = numpy.arange(gmw_diff_flat)
+        pxl_id = numpy.arange(gmw_diff_flat.shape[0])
 
         pxl_id_sub = pxl_id[gmw_diff_flat == 1]
 
@@ -46,7 +46,7 @@ class ProcessCmd(PBPTQProcessTool):
         agb_samples = numpy.clip(agb_samples, 0.1, p_max)
         agb_flat[pxl_id_sub] = agb_samples
 
-        out_agb_arr =agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2]))
+        out_agb_arr = agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2]))
         out_agb_arr[gmw_2025_arr == 0] = 0
 
         rsgislib.imageutils.create_img_from_array_ref_img(
