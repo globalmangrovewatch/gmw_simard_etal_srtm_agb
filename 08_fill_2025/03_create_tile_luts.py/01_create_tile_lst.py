@@ -2,6 +2,7 @@ import os
 import glob
 import rsgislib
 import rsgislib.imagecalc
+import rsgislib.tools.filetools
 import rsgislib.tools.geometrytools
 import rsgislib.tools.utils
 
