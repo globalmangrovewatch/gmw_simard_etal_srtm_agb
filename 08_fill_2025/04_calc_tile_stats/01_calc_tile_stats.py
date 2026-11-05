@@ -11,7 +11,6 @@ def calc_tile_stats(ref_imgs, agb_img_dir, agb_img_str, out_json_file):
     for img in tqdm.tqdm(ref_imgs):
         tile_name = rsgislib.tools.filetools.get_file_basename(img).replace("_reference", "")
         agb_img = os.path.join(agb_img_dir, f"{tile_name}_{agb_img_str}.tif")
-        print(agb_img)
         if os.path.exists(agb_img):
             agb_arr = rsgislib.imageutils.get_img_data_as_arr(agb_img, img_bands = [1])
             agb_flat_arr = agb_arr.flatten()
