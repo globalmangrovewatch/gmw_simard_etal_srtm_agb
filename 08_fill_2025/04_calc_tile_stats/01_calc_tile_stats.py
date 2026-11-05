@@ -3,6 +3,7 @@ import glob
 import tqdm
 import rsgislib.tools.filetools
 import rsgislib.tools.utils
+import rsgislib.imageutils
 import numpy
 
 def calc_tile_stats(ref_imgs, agb_img_dir, agb_img_str, out_json_file):
