@@ -15,7 +15,7 @@ def calc_tile_stats(ref_imgs, agb_img_dir, agb_img_str, out_json_file):
         if os.path.exists(agb_img):
             agb_arr = rsgislib.imageutils.get_img_data_as_arr(agb_img, img_bands = [1])
             agb_flat_arr = agb_arr.flatten()
-            agb_flat_arr = agb_flat_arr[agb_flat_arr.isfinite()]
+            agb_flat_arr = agb_flat_arr[numpy.isfinite(agb_flat_arr)]
             agb_flat_arr = agb_flat_arr[agb_flat_arr > 0]
 
             n_pxl = int(agb_flat_arr.shape[0])
