@@ -9,8 +9,9 @@ def calc_tile_stats(ref_imgs, agb_img_dir, agb_img_str, out_json_file):
     for img in ref_imgs:
         tile_name = rsgislib.tools.filetools.get_file_basename(img).replace("_reference", "")
         agb_img = os.path.join(agb_img_dir, f"{tile_name}_{agb_img_str}.tif")
+        print(agb_img)
         if not os.path.exists(agb_img):
-            print(agb_img)
+            print(f"\tFOUND!")
 
             tile_stats[tile_name] = dict()
     rsgislib.tools.utils.write_dict_to_json(data_dict = tile_stats, out_file = out_json_file)
