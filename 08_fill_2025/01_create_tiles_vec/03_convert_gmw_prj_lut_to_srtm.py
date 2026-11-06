@@ -19,7 +19,7 @@ def jaxa_tr_to_srtm_bl(tile_name: str) -> str:
 
     # Shift from top-right to bottom-left
     srtm_lat = lat - 1
-    srtm_lon = lon - 1
+    srtm_lon = lon# - 1
 
     out_lat_hemi = "N" if srtm_lat >= 0 else "S"
     out_lon_hemi = "E" if srtm_lon >= 0 else "W"
