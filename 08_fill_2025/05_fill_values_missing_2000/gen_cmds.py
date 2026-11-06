@@ -47,10 +47,10 @@ class GenCmds(PBPTGenQProcessToolCmds):
         # (e.g., input / output directories)
         self.gen_command_info(
                 gmw_ext_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2000_all_ref_tiles_rasters/*.tif",
-                gmw_agb_img_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4112_2000_agb/gmw_v4112_2000_agb",
+                gmw_agb_img_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_agb",
                 agb_type_name="srtm_gmw_agb",
                 tile_stats_lut_file = "../04_calc_tile_stats/agb_tile_stats_gmw_v4112_fnl_combined.json",
-                out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_v4112_2000_agb/gmw_v4112_2000_agb_filled"
+                out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_agb_filled"
         )
 
 
