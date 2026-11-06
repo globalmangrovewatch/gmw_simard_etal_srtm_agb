@@ -1,4 +1,6 @@
 import rsgislib.tools.utils
+import glob
+import rsgislib.tools.filetools
 
 tile_stats_lut = rsgislib.tools.utils.read_json_to_dict("agb_tile_stats_v4112.json")
 near_tile_stats_lut = rsgislib.tools.utils.read_json_to_dict("agb_tile_nearest_stats_v4112.json")
@@ -10,7 +12,16 @@ gmw_prj_lv2_lut = rsgislib.tools.utils.read_json_to_dict("../01_create_tiles_vec
 
 print(len(tile_stats_lut))
 
-for tile in tile_stats_lut:
+ref_imgs = glob.glob("../00_ref_imgs/*.tif")
+
+for ref_img in ref_imgs:
+    tile = rsgislib.tools.filetools.get_file_basename(ref_img).split("_")[0]
+    if tile not in tile_stats_lut:
+        tile_stats_lut[tile] = dict()
+        tile_stats_lut[tile]["n"] = 0
+        tile_stats_lut[tile]["mean"] = 0.0
+        tile_stats_lut[tile]["std"] = 0.0
+
     if tile_stats_lut[tile]["n"] < 1000:
         if tile in near_tile_stats_lut and near_tile_stats_lut[tile]["n"] > 1000:
             tile_stats_lut[tile]["n"] = near_tile_stats_lut[tile]["n"]
@@ -33,4 +44,6 @@ for tile in tile_stats_lut:
                 else:
                     raise Exception(f"NO STATS - {tile}")
 
+
+print(len(tile_stats_lut))
 rsgislib.tools.utils.write_dict_to_json(tile_stats_lut, out_file = "agb_tile_stats_gmw_v4112_fnl_combined.json")
