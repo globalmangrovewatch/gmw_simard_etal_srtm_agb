@@ -15,52 +15,38 @@ class ProcessCmd(PBPTQProcessTool):
         super().__init__(cmd_name="perform_analysis.py", descript=None)
 
     def do_processing(self, **kwargs):
-        data_dfs = list()
-        for data_file in self.params["pxl_smpl_files"]:
-            if os.path.exists(data_file):
-                data_df = pandas.read_parquet(data_file)
-                if len(data_df) > 0:
-                    data_dfs.append(data_df)
-        if len(data_dfs) > 0:
-            data_df = pandas.concat(data_dfs, ignore_index=True)
-            agb_vals = data_df['agb'].values
-            agb_vals = agb_vals[numpy.isfinite(agb_vals)]
+        tile_stats = self.params["tile_stats"]
 
-            # Fit a distribution (e.g. lognormal or bounded kernel density estimate)
-            # If samples are clustered/constant, calculate summary stats:
-            #p_min = numpy.min(agb_vals)
-            p_max = numpy.max(agb_vals)
-            p_mean = numpy.mean(agb_vals)
-            p_std = numpy.std(agb_vals) if numpy.std(agb_vals) > 0 else (p_mean * 0.15)
-        else:
-            p_max = 50
-            p_mean = 20
+        p_mean = tile_stats["mean"]
+        if p_mean < 5:
+            p_mean = 5.0
+        p_std = tile_stats["std"]
+        if p_std < (p_mean * 0.15):
             p_std = p_mean * 0.15
+        p_max = p_mean * (2 * p_std)
 
-        gmw_2025_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_2025_img"], img_bands=[1])
-        gmw_diff_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_diff_img"], img_bands=[1])
+        gmw_ext_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_ext_img"], img_bands=[1])
         if os.path.exists(self.params["gmw_agb_img"]):
             agb_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_agb_img"],  img_bands=[1])
         else:
-            agb_arr = numpy.zeros_like(gmw_2025_arr)
+            agb_arr = numpy.zeros_like(gmw_ext_arr)
 
 
-        gmw_diff_flat = gmw_diff_arr.flatten()
-        gmw_2025_flat = gmw_2025_arr.flatten()
+        gmw_ext_flat = gmw_ext_arr.flatten()
         agb_flat = agb_arr.flatten()
-        pxl_id = numpy.arange(gmw_diff_flat.shape[0])
+        pxl_id = numpy.arange(gmw_ext_flat.shape[0])
 
-        pxl_id_sub = pxl_id[numpy.logical_or(gmw_diff_flat == 1, numpy.logical_and(gmw_2025_flat == 1, agb_flat < 1))]
+        pxl_id_sub = pxl_id[numpy.logical_and(gmw_ext_flat == 1, agb_flat < 1)]
 
         agb_samples = numpy.random.normal(loc=p_mean, scale=p_std, size=len(pxl_id_sub))
-        agb_samples = numpy.clip(agb_samples, 0.1, p_max)
+        agb_samples = numpy.clip(agb_samples, 5, p_max)
         agb_flat[pxl_id_sub] = agb_samples
 
         out_agb_arr = numpy.expand_dims(agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2])), axis=0)
-        out_agb_arr[gmw_2025_arr == 0] = 0
+        out_agb_arr[gmw_ext_arr == 0] = 0
 
         rsgislib.imageutils.create_img_from_array_ref_img(
-            data_arr = out_agb_arr, output_img = self.params["out_img"], ref_img = self.params["gmw_2025_img"], gdalformat = "GTIFF", datatype = rsgislib.TYPE_16INT, options = ["TILED=YES", "INTERLEAVE=PIXEL", "COMPRESS=DEFLATE"], no_data_val = 0.0)
+            data_arr = out_agb_arr, output_img = self.params["out_img"], ref_img = self.params["gmw_ext_img"], gdalformat = "GTIFF", datatype = rsgislib.TYPE_16INT, options = ["TILED=YES", "INTERLEAVE=PIXEL", "COMPRESS=DEFLATE"], no_data_val = 0.0)
         rsgislib.imageutils.pop_img_stats(self.params["out_img"], use_no_data=True, no_data_val=0,
                                           calc_pyramids=True)
 
@@ -68,10 +54,9 @@ class ProcessCmd(PBPTQProcessTool):
         # Return a list of the required fields which will be checked
         return [
             "tilename",
-            "gmw_2025_img",
-            "gmw_diff_img",
+            "gmw_ext_img",
             "gmw_agb_img",
-            "pxl_smpl_files",
+            "tile_stats",
             "out_img",
         ]
 

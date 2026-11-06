@@ -2,6 +2,7 @@ import logging
 import os
 import glob
 import rsgislib.tools.filetools
+import rsgislib.tools.utils
 
 from pbprocesstools.pbpt_q_process import PBPTGenQProcessToolCmds
 
@@ -15,42 +16,44 @@ class GenCmds(PBPTGenQProcessToolCmds):
             os.mkdir(kwargs["out_dir"])
 
         # Get the list of input images
-        agb_imgs = glob.glob(kwargs["agb_imgs"])
+        gmw_ext_imgs = glob.glob(kwargs["gmw_ext_imgs"])
+        agb_type_name = kwargs['agb_type_name']
+
+        tile_stats_lut = rsgislib.tools.utils.read_json_to_dict(kwargs["tile_stats_lut_file"])
+        print(len(tile_stats_lut))
 
         # Loop through the reference images to create the jobs
-        for agb_img in agb_imgs:
-            # Get the basename of the input file to make the output file name
-            basename = rsgislib.tools.filetools.get_file_basename(agb_img)
+        for gmw_ext_img in gmw_ext_imgs:
+            tilename = rsgislib.tools.filetools.get_file_basename(gmw_ext_img).split("_")[0]
+
+            gmw_agb_img = os.path.join(kwargs["gmw_agb_img_dir"], f"{tilename}_{agb_type_name}_2000_filled.tif")
 
             # Create the output file name
-            out_pd_file = os.path.join(kwargs["out_dir"], f"{basename}_pxl_vals.parquet.gz")
+            out_img = os.path.join(kwargs["out_dir"], f"{tilename}_{agb_type_name}_2025_filled.tif")
             # Check if the output file exists.
-            if not os.path.exists(out_pd_file):
+            if not os.path.exists(out_img):
                 # You will probably have a loop here:
                 # Within the loop create a dict with the parameters for each
                 # job which will be added to the self.params list.
                 c_dict = dict()
-                c_dict["agb_img"] = agb_img
-                c_dict["out_pd_file"] = out_pd_file
+                c_dict["tilename"] = tilename
+                c_dict["gmw_ext_img"] = gmw_ext_img
+                c_dict["gmw_agb_img"] = gmw_agb_img
+                c_dict["tile_stats"] = tile_stats_lut[tilename]
+                c_dict["out_img"] = out_img
                 self.params.append(c_dict)
 
     def run_gen_commands(self):
         # Could Pass info to gen_command_info function
         # (e.g., input / output directories)
         self.gen_command_info(
-            agb_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hba/*.tif',
-            out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hba_pxl_vals"
+                gmw_ext_imgs="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw/gmw_v4112_2025_all_ref_tiles_rasters/*.tif",
+                gmw_agb_img_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2000_agb_filled",
+                agb_type_name="srtm_gmw_agb",
+                tile_stats_lut_file = "../06_calc_tile_stats_25th_percentile/agb_tile_stats_gmw_v4112_2000_lt_25th_percentile_fnl_combined.json",
+                out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_agb/gmw_v4112_2025_agb_filled"
         )
 
-        self.gen_command_info(
-                agb_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hchm/*.tif',
-                out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hchm_pxl_vals"
-        )
-
-        self.gen_command_info(
-                agb_imgs='/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hmax/*.tif',
-                out_dir="/bigdata/GlobalMangroveWatch/gmw_blue_carbon_v4_ext/simard_srtm_agb/data/gmw_srtm_mangrove_hgt/gmw_v4112_2000_hmax_pxl_vals"
-        )
 
         self.pop_params_db()
 
