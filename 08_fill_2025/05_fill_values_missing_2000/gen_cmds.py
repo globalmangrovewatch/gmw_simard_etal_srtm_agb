@@ -38,7 +38,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
                 c_dict["tilename"] = tilename
                 c_dict["gmw_ext_img"] = gmw_ext_img
                 c_dict["gmw_agb_img"] = gmw_agb_img
-                c_dict["tile_stats"] = tile_stats_lut["tilename"]
+                c_dict["tile_stats"] = tile_stats_lut[tilename]
                 c_dict["out_img"] = out_img
                 self.params.append(c_dict)
 
