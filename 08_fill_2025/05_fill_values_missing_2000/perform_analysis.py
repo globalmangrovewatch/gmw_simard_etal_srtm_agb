@@ -18,7 +18,11 @@ class ProcessCmd(PBPTQProcessTool):
         tile_stats = self.params["tile_stats"]
 
         p_mean = tile_stats["mean"]
+        if p_mean < 5:
+            p_mean = 5.0
         p_std = tile_stats["std"]
+        if p_std < (p_mean * 0.15):
+            p_std = p_mean * 0.15
         p_max = p_mean * (2 * p_std)
 
         gmw_ext_arr = rsgislib.imageutils.get_img_data_as_arr(self.params["gmw_ext_img"], img_bands=[1])
