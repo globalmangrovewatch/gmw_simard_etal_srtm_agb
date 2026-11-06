@@ -29,7 +29,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
             gmw_agb_img = os.path.join(kwargs["gmw_agb_img_dir"], f"{tilename}_{agb_type_name}.tif")
 
             # Create the output file name
-            out_img = os.path.join(kwargs["out_dir"], f"{tilename}{agb_type_name}_2000_filled.tif")
+            out_img = os.path.join(kwargs["out_dir"], f"{tilename}_{agb_type_name}_2000_filled.tif")
             # Check if the output file exists.
             if not os.path.exists(out_img):
                 # You will probably have a loop here:
