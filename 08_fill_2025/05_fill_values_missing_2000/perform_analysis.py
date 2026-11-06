@@ -39,7 +39,7 @@ class ProcessCmd(PBPTQProcessTool):
         agb_flat[pxl_id_sub] = agb_samples
 
         out_agb_arr = numpy.expand_dims(agb_flat.reshape((agb_arr.shape[1], agb_arr.shape[2])), axis=0)
-        out_agb_arr[gmw_ext_flat == 0] = 0
+        out_agb_arr[gmw_ext_arr == 0] = 0
 
         rsgislib.imageutils.create_img_from_array_ref_img(
             data_arr = out_agb_arr, output_img = self.params["out_img"], ref_img = self.params["gmw_ext_img"], gdalformat = "GTIFF", datatype = rsgislib.TYPE_16INT, options = ["TILED=YES", "INTERLEAVE=PIXEL", "COMPRESS=DEFLATE"], no_data_val = 0.0)
