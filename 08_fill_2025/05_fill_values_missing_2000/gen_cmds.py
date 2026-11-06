@@ -20,6 +20,7 @@ class GenCmds(PBPTGenQProcessToolCmds):
         agb_type_name = kwargs['agb_type_name']
 
         tile_stats_lut = rsgislib.tools.utils.read_json_to_dict(kwargs["tile_stats_lut_file"])
+        print(len(tile_stats_lut))
 
         # Loop through the reference images to create the jobs
         for gmw_ext_img in gmw_ext_imgs:
